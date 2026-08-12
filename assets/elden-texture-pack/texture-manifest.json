@@ -1,0 +1,255 @@
+{
+  "pack": "elden-texture-pack",
+  "resolution": [
+    512,
+    512
+  ],
+  "catalog": [
+    {
+      "file": "suelo/suelo-adoquin-humedo.png",
+      "name": "suelo-adoquin-humedo",
+      "category": "suelo",
+      "description": "Adoquín oscuro húmedo con grietas de luz azul rúnica.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "suelo/suelo-tierra-piedras.png",
+      "name": "suelo-tierra-piedras",
+      "category": "suelo",
+      "description": "Tierra comprimida con piedra irregular y barro seco.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "suelo/suelo-lodo-runico.png",
+      "name": "suelo-lodo-runico",
+      "category": "suelo",
+      "description": "Lodo oscuro con runas magenta apagadas y lectura de mazmorra.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "suelo/suelo-pasto-seco.png",
+      "name": "suelo-pasto-seco",
+      "category": "suelo",
+      "description": "Pasto seco de tonos oliva para zonas abandonadas.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "arquitectura/muro-runico.png",
+      "name": "muro-runico",
+      "category": "arquitectura",
+      "description": "Muro de castillo desgastado con inscripciones emisivas.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "arquitectura/muro-ladrillo-medieval.png",
+      "name": "muro-ladrillo-medieval",
+      "category": "arquitectura",
+      "description": "Ladrillo medieval húmedo y pesado.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "arquitectura/piedra-antigua.png",
+      "name": "piedra-antigua",
+      "category": "arquitectura",
+      "description": "Piedra antigua con desgaste y contraste de grietas.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "arquitectura/ruina-erosionada.png",
+      "name": "ruina-erosionada",
+      "category": "arquitectura",
+      "description": "Ruina erosionada con manchas de humedad y ceniza.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "materiales/madera-quemada.png",
+      "name": "madera-quemada",
+      "category": "materiales",
+      "description": "Madera quemada con grietas internas de brasa.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "materiales/hierro-oxidado.png",
+      "name": "hierro-oxidado",
+      "category": "materiales",
+      "description": "Hierro oscuro con óxido terroso y superficie áspera.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "materiales/metal-sangre-seca.png",
+      "name": "metal-sangre-seca",
+      "category": "materiales",
+      "description": "Metal gris ennegrecido con sangre seca de contraste rojo.",
+      "tileable": true,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "overlays/niebla-volumetrica.png",
+      "name": "niebla-volumetrica",
+      "category": "overlays",
+      "description": "Niebla baja para separar planos del escenario.",
+      "tileable": false,
+      "transparent_overlay": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "overlays/ceniza-flotante.png",
+      "name": "ceniza-flotante",
+      "category": "overlays",
+      "description": "Ceniza suspendida para ruinas y zonas de fuego.",
+      "tileable": false,
+      "transparent_overlay": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "overlays/polvo-caminar.png",
+      "name": "polvo-caminar",
+      "category": "overlays",
+      "description": "Polvo de suelo para pasos y aterrizajes.",
+      "tileable": false,
+      "transparent_overlay": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "overlays/brasas.png",
+      "name": "brasas",
+      "category": "overlays",
+      "description": "Brasas cálidas para madera quemada y fogatas.",
+      "tileable": false,
+      "transparent_overlay": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "overlays/luz-runica.png",
+      "name": "luz-runica",
+      "category": "overlays",
+      "description": "Partículas de luz azul para altares y runas.",
+      "tileable": false,
+      "transparent_overlay": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "objetos/cofre-ancestral.png",
+      "name": "cofre-ancestral",
+      "category": "objetos",
+      "description": "Cofre de madera oscura con refuerzo dorado y lectura de tesoro.",
+      "tileable": false,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "objetos/columna-rota.png",
+      "name": "columna-rota",
+      "category": "objetos",
+      "description": "Columna destruida con un matiz frío de musgo mágico.",
+      "tileable": false,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "objetos/altar-runa.png",
+      "name": "altar-runa",
+      "category": "objetos",
+      "description": "Sello rúnico para altar, puerta o punto de interacción.",
+      "tileable": false,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "objetos/restos-estructura.png",
+      "name": "restos-estructura",
+      "category": "objetos",
+      "description": "Restos de estructura para poblar ruinas y zonas de combate.",
+      "tileable": false,
+      "transparent_overlay": false,
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "notes": [
+    "Tiles de ambiente en PNG RGB 512x512.",
+    "Overlays en PNG RGBA 512x512.",
+    "No se modificó la página interactiva.",
+    "Los nombres de archivo están en español y listos para importar."
+  ]
+}

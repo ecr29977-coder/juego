@@ -1,0 +1,132 @@
+{
+  "cell": [
+    200,
+    200
+  ],
+  "gutter": 0,
+  "origin": [
+    100,
+    188
+  ],
+  "directions": [
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE",
+    "E",
+    "SE"
+  ],
+  "grid_semantics": "rows=directions; columns=frames",
+  "layer": "Body/Base",
+  "transparent_background": true,
+  "source_note": "Generated from the approved neutral base sprite using nearest-neighbor procedural frame variations.",
+  "sheets": {
+    "idle": {
+      "file": "body-idle.png",
+      "rows": 8,
+      "columns": 4
+    },
+    "walk": {
+      "file": "body-walk.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "run": {
+      "file": "body-run.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "dodge": {
+      "file": "body-dodge.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "attack-light": {
+      "file": "body-attack-light.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "attack-heavy": {
+      "file": "body-attack-heavy.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "attack-charged": {
+      "file": "body-attack-charged.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "attack-air": {
+      "file": "body-attack-air.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "block": {
+      "file": "body-block.png",
+      "rows": 8,
+      "columns": 4
+    },
+    "hit": {
+      "file": "body-hit.png",
+      "rows": 8,
+      "columns": 4
+    },
+    "stagger": {
+      "file": "body-stagger.png",
+      "rows": 8,
+      "columns": 5
+    },
+    "cast": {
+      "file": "body-cast.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "interact": {
+      "file": "body-interact.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "pickup": {
+      "file": "body-pickup.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "open-chest": {
+      "file": "body-open-chest.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "use-item": {
+      "file": "body-use-item.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "emote": {
+      "file": "body-emote.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "burn": {
+      "file": "body-burn.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "freeze": {
+      "file": "body-freeze.png",
+      "rows": 8,
+      "columns": 6
+    },
+    "death": {
+      "file": "body-death.png",
+      "rows": 8,
+      "columns": 8
+    },
+    "respawn": {
+      "file": "body-respawn.png",
+      "rows": 8,
+      "columns": 8
+    }
+  }
+}

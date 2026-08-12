@@ -1,0 +1,324 @@
+{
+  "sheet_count": 21,
+  "all_geometry_ok": true,
+  "all_rgba": true,
+  "all_binary_alpha": true,
+  "all_populated": true,
+  "reports": [
+    {
+      "action": "idle",
+      "mode": "RGBA",
+      "dimensions": [
+        800,
+        1600
+      ],
+      "expected_dimensions": [
+        800,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "walk",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "run",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "dodge",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "attack-light",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "attack-heavy",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "attack-charged",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "attack-air",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "block",
+      "mode": "RGBA",
+      "dimensions": [
+        800,
+        1600
+      ],
+      "expected_dimensions": [
+        800,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "hit",
+      "mode": "RGBA",
+      "dimensions": [
+        800,
+        1600
+      ],
+      "expected_dimensions": [
+        800,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "stagger",
+      "mode": "RGBA",
+      "dimensions": [
+        1000,
+        1600
+      ],
+      "expected_dimensions": [
+        1000,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "cast",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "interact",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "pickup",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "open-chest",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "use-item",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "emote",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "burn",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "freeze",
+      "mode": "RGBA",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "expected_dimensions": [
+        1200,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "death",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    },
+    {
+      "action": "respawn",
+      "mode": "RGBA",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "expected_dimensions": [
+        1600,
+        1600
+      ],
+      "geometry_ok": true,
+      "binary_alpha": true,
+      "has_opaque_pixels": true
+    }
+  ]
+}

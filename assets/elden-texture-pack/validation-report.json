@@ -1,0 +1,249 @@
+{
+  "file_count": 20,
+  "all_size_ok": true,
+  "all_visible": true,
+  "tile_count": 15,
+  "overlay_count": 5,
+  "reports": [
+    {
+      "file": "suelo/suelo-adoquin-humedo.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 36.12,
+      "transparent_overlay": false
+    },
+    {
+      "file": "suelo/suelo-tierra-piedras.png",
+      "mode": "RGB",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 30.25,
+      "transparent_overlay": false
+    },
+    {
+      "file": "suelo/suelo-lodo-runico.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 15.23,
+      "transparent_overlay": false
+    },
+    {
+      "file": "suelo/suelo-pasto-seco.png",
+      "mode": "RGB",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 22.52,
+      "transparent_overlay": false
+    },
+    {
+      "file": "arquitectura/muro-runico.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 20.98,
+      "transparent_overlay": false
+    },
+    {
+      "file": "arquitectura/muro-ladrillo-medieval.png",
+      "mode": "RGB",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 26.28,
+      "transparent_overlay": false
+    },
+    {
+      "file": "arquitectura/piedra-antigua.png",
+      "mode": "RGB",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 32.37,
+      "transparent_overlay": false
+    },
+    {
+      "file": "arquitectura/ruina-erosionada.png",
+      "mode": "RGB",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 24.41,
+      "transparent_overlay": false
+    },
+    {
+      "file": "materiales/madera-quemada.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 26.8,
+      "transparent_overlay": false
+    },
+    {
+      "file": "materiales/hierro-oxidado.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 22.0,
+      "transparent_overlay": false
+    },
+    {
+      "file": "materiales/metal-sangre-seca.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 15.48,
+      "transparent_overlay": false
+    },
+    {
+      "file": "overlays/niebla-volumetrica.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 92.46,
+      "transparent_overlay": true
+    },
+    {
+      "file": "overlays/ceniza-flotante.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 2.53,
+      "transparent_overlay": true
+    },
+    {
+      "file": "overlays/polvo-caminar.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 1.92,
+      "transparent_overlay": true
+    },
+    {
+      "file": "overlays/brasas.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 1.65,
+      "transparent_overlay": true
+    },
+    {
+      "file": "overlays/luz-runica.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 2.1,
+      "transparent_overlay": true
+    },
+    {
+      "file": "objetos/cofre-ancestral.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 2.38,
+      "transparent_overlay": false
+    },
+    {
+      "file": "objetos/columna-rota.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 58.66,
+      "transparent_overlay": false
+    },
+    {
+      "file": "objetos/altar-runa.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 1.64,
+      "transparent_overlay": false
+    },
+    {
+      "file": "objetos/restos-estructura.png",
+      "mode": "RGBA",
+      "dimensions": [
+        512,
+        512
+      ],
+      "size_ok": true,
+      "has_visible_content": true,
+      "mean_luminance_proxy": 24.23,
+      "transparent_overlay": false
+    }
+  ]
+}
