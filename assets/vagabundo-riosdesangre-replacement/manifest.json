@@ -1,0 +1,166 @@
+{
+  "pack": "vagabundo-riosdesangre-replacement",
+  "source": "pasted_file_33oQAR_arma-rios-de-sangre.png",
+  "purpose": "Reemplazo del modelo de Ríos de Sangre sin modificar las demás armas.",
+  "cell": [
+    200,
+    200
+  ],
+  "grid": {
+    "rows": 8,
+    "columns": 6,
+    "row_axis": "direction",
+    "column_axis": "frame"
+  },
+  "directions": [
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE",
+    "E",
+    "SE"
+  ],
+  "anchor": {
+    "type": "grip",
+    "x": 100,
+    "y": 160
+  },
+  "layer": "Weapon above Body and below optional VFX",
+  "alpha": "RGBA binary alpha",
+  "files": [
+    {
+      "action": "idle",
+      "file": "riosdesangre-idle.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "walk",
+      "file": "riosdesangre-walk.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "run",
+      "file": "riosdesangre-run.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "attack-light",
+      "file": "riosdesangre-attack-light.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "attack-heavy",
+      "file": "riosdesangre-attack-heavy.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "attack-charged",
+      "file": "riosdesangre-attack-charged.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "attack-air",
+      "file": "riosdesangre-attack-air.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "block",
+      "file": "riosdesangre-block.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "dodge",
+      "file": "riosdesangre-dodge.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "cast",
+      "file": "riosdesangre-cast.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "hit",
+      "file": "riosdesangre-hit.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "stagger",
+      "file": "riosdesangre-stagger.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "death",
+      "file": "riosdesangre-death.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "respawn",
+      "file": "riosdesangre-respawn.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "interact",
+      "file": "riosdesangre-interact.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "pickup",
+      "file": "riosdesangre-pickup.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "use-item",
+      "file": "riosdesangre-use-item.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "open-chest",
+      "file": "riosdesangre-open-chest.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "emote",
+      "file": "riosdesangre-emote.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "burn",
+      "file": "riosdesangre-burn.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "freeze",
+      "file": "riosdesangre-freeze.png",
+      "rows": 8,
+      "columns": 6
+    },
+    {
+      "action": "slash-fx-optional",
+      "file": "fx-riosdesangre-slash.png",
+      "rows": 8,
+      "columns": 6
+    }
+  ]
+}

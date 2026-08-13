@@ -1,0 +1,260 @@
+{
+  "pack": "vagabundo-weapons-dark-fantasy",
+  "format": "RGBA PNG",
+  "sheet": [
+    1200,
+    1600
+  ],
+  "cell": [
+    200,
+    200
+  ],
+  "directions": [
+    "S",
+    "SW",
+    "W",
+    "NW",
+    "N",
+    "NE",
+    "E",
+    "SE"
+  ],
+  "frames_per_direction": 6,
+  "catalog": [
+    {
+      "id": "espadalarga",
+      "nombre": "Juramento de Ceniza",
+      "source": "bases/espadalarga.png",
+      "directory": "espadalarga",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "lanza",
+      "nombre": "Pica del Centinela",
+      "source": "bases/lanza.png",
+      "directory": "lanza",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "daga",
+      "nombre": "Misericordia Carmesí",
+      "source": "bases/daga.png",
+      "directory": "daga",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "ballesta",
+      "nombre": "Ballesta de la Torre Caída",
+      "source": "bases/ballesta.png",
+      "directory": "ballesta",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "arco",
+      "nombre": "Arco del Roble Fúnebre",
+      "source": "bases/arco.png",
+      "directory": "arco",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "granespada",
+      "nombre": "Coloso del Crisol",
+      "source": "bases/granespada.png",
+      "directory": "granespada",
+      "actions": [
+        "idle",
+        "walk",
+        "run",
+        "attack-light",
+        "attack-heavy",
+        "attack-charged",
+        "attack-air",
+        "block",
+        "dodge",
+        "cast",
+        "hit",
+        "stagger",
+        "death",
+        "respawn",
+        "interact",
+        "pickup",
+        "use-item",
+        "open-chest",
+        "emote",
+        "burn",
+        "freeze"
+      ],
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ],
+      "sheet": [
+        1200,
+        1600
+      ]
+    }
+  ],
+  "notes": "Spritesheets generados a partir de armas pixel-art originales. Cada acción mantiene seis cuadros animados para el mismo formato de personaje del proyecto."
+}

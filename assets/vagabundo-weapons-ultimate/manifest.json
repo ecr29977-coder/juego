@@ -1,0 +1,66 @@
+{
+  "pack": "vagabundo-weapons-ultimate",
+  "cell": [
+    200,
+    200
+  ],
+  "directions": 8,
+  "frames_per_direction": 6,
+  "catalog": [
+    {
+      "id": "riosdesangre",
+      "nombre": "Katana Legendaria • Ríos de Sangre",
+      "file": "ultimate-riosdesangre.png",
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": "espadablasfema",
+      "nombre": "Espada Blasfema de Rykard",
+      "file": "ultimate-espadablasfema.png",
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": "espadonluna",
+      "nombre": "Espadón de la Luna Negra",
+      "file": "ultimate-espadonluna.png",
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": "granespadaradahn",
+      "nombre": "Gran Espada del General Radahn",
+      "file": "ultimate-granespadaradahn.png",
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ]
+    },
+    {
+      "id": "bastonlucidez",
+      "nombre": "Bastón de la Reina Glintstone",
+      "file": "ultimate-bastonlucidez.png",
+      "rows": 8,
+      "columns": 6,
+      "cell": [
+        200,
+        200
+      ]
+    }
+  ]
+}
