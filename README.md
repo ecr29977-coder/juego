@@ -95,6 +95,12 @@ El **Bastón Glintstone** obtiene `J — Aguja Glintstone`, un proyectil mágico
 
 Al morir, la partida ya no obliga a comenzar de nuevo. La pantalla ofrece regresar al último checkpoint disponible —mostrando su día— o regresar al inicio para comenzar otra partida. Si no existe checkpoint, la primera opción queda desactivada.
 
+## Personaje principal actualizado
+
+El personaje principal utiliza ahora el paquete LPC muscular proporcionado por el usuario en `assets/drakzeth/player-lpc/`. Las animaciones están separadas en hojas estándar de 64 × 64 con cuatro filas direccionales: reposo, caminar, correr, ataques, lanzamiento mágico, daño y estado final. Las armas, habilidades, pasivas, definitiva, controles y estadísticas del jugador permanecen activos.
+
+La configuración usa reposo a 7 FPS, caminar a 12 FPS, correr a 16 FPS, ataque ligero a 14 FPS, ataque pesado a 12 FPS, lanzamiento a 14 FPS, daño a 12 FPS y estado final a 10 FPS. Si una acción opcional aún no termina de cargar, se utiliza el idle LPC; el sistema nunca vuelve al personaje anterior. Los tiempos de daño, coste, enfriamientos y ventanas de impacto no cambian.
+
 ## Jefes colosales
 
 Los seis guardianes son ahora claramente más grandes que Trolls y Colosos: su radio se multiplica por **2.35**, su vida base por **12** y su daño base por **2** antes de aplicar la progresión de día existente. La Fase II solo suma un aumento moderado de velocidad y daño, pero abre una ventana de vulnerabilidad más amplia al iniciar para que la transición premie al jugador.

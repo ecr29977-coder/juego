@@ -323,7 +323,7 @@
           <b>X</b> Rugido · <b>Z</b> Aliento · <b>V/G/B/M/N</b> habilidades avanzadas · <b>E</b> ejecución<br>
           <b>1-9</b> armas · <b>C</b> combo Lanza ↔ Ballesta · Al subir de nivel eliges tus estadísticas.
         </p>
-        <button class="btn-juego" id="surv-start-btn">Comenzar Supervivencia</button>
+        <button class="btn-juego" id="surv-start-btn" disabled>CARGANDO PERSONAJE...</button>
       </div>
 
       <!-- REWARD -->
@@ -364,6 +364,8 @@
           <div style="width:100%;text-align:left;margin-top:0.5rem;color:#e8c7cc;font-size:0.9rem;">
             <label>Volumen <input type="range" id="surv-vol" min="0" max="1" step="0.05" style="width:100%"></label>
             <label style="display:block;margin-top:0.4rem;">Brillo <input type="range" id="surv-bright" min="0.5" max="1.4" step="0.05" style="width:100%"></label>
+            <label style="display:flex;align-items:center;gap:0.45rem;margin-top:0.55rem;color:#ffd1d8;"><input type="checkbox" id="surv-performance"> Modo de rendimiento</label>
+            <small style="display:block;margin-top:0.25rem;color:#cdbfa0;line-height:1.25;">Reduce partículas, VFX simultáneos y adornos; no cambia daño, IA ni controles.</small>
           </div>
         </div>
       </div>
@@ -417,7 +419,7 @@
           <div class="surv-bar-row"><span class="surv-bar-tag">XP</span><div class="bar-wrap"><div class="bar" id="surv-xp" style="width:0%;background:linear-gradient(90deg,#5d0d20,#d52f48)"></div></div><span class="surv-bar-num" id="surv-xp-n">0/40</span></div>
           <div class="surv-hud-meta">
             <span id="surv-flasks">🧪 ×5</span>
-            <span id="surv-weapon">Espada Larga</span>
+            <span class="surv-weapon-meta"><img id="surv-weapon-icon" class="surv-weapon-icon" src="assets/drakzeth/renewal/ui/espadalarga.png" alt="Icono del arma actual"><span id="surv-weapon">Espada Larga</span></span>
             <span id="surv-build">Build: Centinela Carmesí</span>
             <span>Kills <span id="surv-kills">0</span></span>
           </div>
@@ -430,7 +432,7 @@
         </div>
         <div class="surv-hud-topright">
           <div class="dragon-skill-hud" aria-label="Habilidades del Sello Dracónico">
-            <div class="dragon-skill-chip"><span class="dragon-skill-key">X</span><span><b>Rugido</b><small id="dragon-roar-cd">LISTO · 24 FP</small></span></div>
+            <div class="dragon-skill-chip"><span class="dragon-skill-key">X</span><span><b>Rugido</b><small id="dragon-roar-cd">LISTO · 26 FP</small></span></div>
             <div class="dragon-skill-chip"><span class="dragon-skill-key">Z</span><span><b>Aliento</b><small id="dragon-breath-cd">LISTO · 20 FP</small></span></div>
             <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">V</span><span><b>Garra</b><small>14 FP</small></span></div>
             <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">G</span><span><b>Vuelo</b><small>22 FP</small></span></div>
@@ -444,7 +446,7 @@
           </div>
           <div class="ultimate-skill-hud" aria-label="Artes y definitiva">
             <div class="dragon-skill-chip dragon-skill-chip--arcane"><span class="dragon-skill-key">J</span><span><b>Arte del arma</b><small id="magic-skill-cd">Según arma</small></span></div>
-            <div class="dragon-skill-chip dragon-skill-chip--ultimate"><span class="dragon-skill-key">U</span><span><b>Apoteosis</b><small id="ultimate-cd">90 s</small></span></div>
+            <div class="dragon-skill-chip dragon-skill-chip--ultimate"><span class="dragon-skill-key">U</span><span><b>Apoteosis</b><small id="ultimate-cd">70 s</small></span></div>
           </div>
           <div class="hud-timer" id="surv-timer">1:00</div>
           <div class="hud-moon" id="surv-moon"></div>
@@ -472,6 +474,7 @@
           <button type="button" id="mob-magic-skill" class="mob-btn mob-btn--arcane">J · Arte</button>
           <button type="button" id="mob-ultimate" class="mob-btn mob-btn--ultimate">U · Ulti</button>
           <button type="button" id="mob-execute" class="mob-btn mob-btn--dragon">E · Ejecutar</button>
+          <button type="button" id="mob-combo" class="mob-btn mob-btn--dragon">C · Combo</button>
           <button type="button" id="mob-dodge" class="mob-btn">Rodar</button>
           <button type="button" id="mob-parry" class="mob-btn">Parry</button>
           <button type="button" id="mob-flask" class="mob-btn">🧪</button>
@@ -485,7 +488,7 @@
         Shift — rodar · Q — parry · R — frasco<br>
         X — Rugido del Sello · Z — Aliento Carmesí · E — ejecución · C — combo Lanza ↔ Ballesta<br>
         T — Luna Fría · Y — Espada Astral (requieren el Espadón Lunar)<br>
-        J — habilidad del Bastón/Sello · U — Apoteosis del Sello (90 s)<br>
+        J — habilidad del Bastón/Sello · U — Apoteosis del Sello (70 s)<br>
         ESC — pausa · 1-9 — arma · F — pantalla completa
       </div>
       <button class="btn-fullscreen" id="fullscreen-btn" title="Pantalla completa (F)">⛶</button>
@@ -598,14 +601,14 @@
     <p class="seccion__subtitulo">Las armas legendarias que han marcado a toda una generación de Sinluz.</p>
   </div>
   <div class="armas-grid reveal">
-    <div class="arma-card"><div class="arma-icon">⚔️</div><h3>Espada de la Noche y el Fuego</h3><p class="arma-tipo">Gran Espada · Fe/Sabiduría</p><p class="arma-desc">Cambia de forma: una ola de fuego o una luna fría que corta a distancia.</p><div class="arma-requisitos">FUE 24 · SAB 24 · FE 24</div></div>
-    <div class="arma-card"><div class="arma-icon">🗡️</div><h3>Ríos de Sangre</h3><p class="arma-tipo">Katana · Arcano</p><p class="arma-desc">La katana del Invocado de Sangre. Acumula hemorragia con cada golpe.</p><div class="arma-requisitos">FUE 12 · DES 18 · ARC 20</div></div>
-    <div class="arma-card"><div class="arma-icon">🌙</div><h3>Espada de la Luna Oscura</h3><p class="arma-tipo">Gran Espada · Sabiduría</p><p class="arma-desc">Obsequio de Ranni. Dispara ondas lunares heladas con el ataque fuerte.</p><div class="arma-requisitos">FUE 16 · DES 11 · SAB 38</div></div>
-    <div class="arma-card"><div class="arma-icon">🪓</div><h3>Estrellas Ruinosas</h3><p class="arma-tipo">Gran Hacha · Fuerza</p><p class="arma-desc">El haza de Radahn. Un ataque cargado invoca una estrella que cae del cielo.</p><div class="arma-requisitos">FUE 60 · DES 17</div></div>
-    <div class="arma-card"><div class="arma-icon">🔱</div><h3>Manos de Malenia</h3><p class="arma-tipo">Garras · Destreza</p><p class="arma-desc">La katana prostética de Malenia. Combo de 5 ataques rápidos y elegantes.</p><div class="arma-requisitos">FUE 16 · DES 48</div></div>
-    <div class="arma-card"><div class="arma-icon">🪄</div><h3>Bastón de los Astros</h3><p class="arma-tipo">Bastón · Sabiduría</p><p class="arma-desc">Mejora los hechizos de gravedad. Imprescindible para cualquier astrólogo.</p><div class="arma-requisitos">FUE 8 · SAB 55</div></div>
-    <div class="arma-card"><div class="arma-icon">🐉</div><h3>Espada del Dragón Ekzykes</h3><p class="arma-tipo">Gran Espada · Arcano</p><p class="arma-desc">Respiración de putrefacción escarlata. Ideal para builds de arcano.</p><div class="arma-requisitos">FUE 24 · DES 14 · ARC 27</div></div>
-    <div class="arma-card"><div class="arma-icon">🛡️</div><h3>Escudo de la Bestia de Crisol</h3><p class="arma-tipo">Escudo Grande · Fuerza</p><p class="arma-desc">Bloquea el 100% del daño físico. Su habilidad repele todo.</p><div class="arma-requisitos">FUE 30</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/espadablasfema.png" alt="Espada de la Noche y el Fuego"></div><h3>Espada de la Noche y el Fuego</h3><p class="arma-tipo">Gran Espada · Fe/Sabiduría</p><p class="arma-desc">Cambia de forma: una ola de fuego o una luna fría que corta a distancia.</p><div class="arma-requisitos">FUE 24 · SAB 24 · FE 24</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/riosdesangre.png" alt="Ríos de Sangre"></div><h3>Ríos de Sangre</h3><p class="arma-tipo">Katana · Arcano</p><p class="arma-desc">La katana del Invocado de Sangre. Acumula hemorragia con cada golpe.</p><div class="arma-requisitos">FUE 12 · DES 18 · ARC 20</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/espadonluna.png" alt="Espada de la Luna Oscura"></div><h3>Espada de la Luna Oscura</h3><p class="arma-tipo">Gran Espada · Sabiduría</p><p class="arma-desc">Obsequio de Ranni. Dispara ondas lunares heladas con el ataque fuerte.</p><div class="arma-requisitos">FUE 16 · DES 11 · SAB 38</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/martillorubi.png" alt="Estrellas Ruinosas"></div><h3>Estrellas Ruinosas</h3><p class="arma-tipo">Gran Hacha · Fuerza</p><p class="arma-desc">El haza de Radahn. Un ataque cargado invoca una estrella que cae del cielo.</p><div class="arma-requisitos">FUE 60 · DES 17</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/colmillosabueso.png" alt="Manos de Malenia"></div><h3>Manos de Malenia</h3><p class="arma-tipo">Garras · Destreza</p><p class="arma-desc">La katana prostética de Malenia. Combo de 5 ataques rápidos y elegantes.</p><div class="arma-requisitos">FUE 16 · DES 48</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/baston.png" alt="Bastón de los Astros"></div><h3>Bastón de los Astros</h3><p class="arma-tipo">Bastón · Sabiduría</p><p class="arma-desc">Mejora los hechizos de gravedad. Imprescindible para cualquier astrólogo.</p><div class="arma-requisitos">FUE 8 · SAB 55</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/granespada.png" alt="Espada del Dragón Ekzykes"></div><h3>Espada del Dragón Ekzykes</h3><p class="arma-tipo">Gran Espada · Arcano</p><p class="arma-desc">Respiración de putrefacción escarlata. Ideal para builds de arcano.</p><div class="arma-requisitos">FUE 24 · DES 14 · ARC 27</div></div>
+    <div class="arma-card"><div class="arma-icon arma-icon--asset"><img src="assets/drakzeth/renewal/ui/escudo.png" alt="Escudo de la Bestia de Crisol"></div><h3>Escudo de la Bestia de Crisol</h3><p class="arma-tipo">Escudo Grande · Fuerza</p><p class="arma-desc">Bloquea el 100% del daño físico. Su habilidad repele todo.</p><div class="arma-requisitos">FUE 30</div></div>
   </div>
 </section>
 
@@ -691,6 +694,6 @@
   <p class="pie__extra">Los Reinos Quebrados aguardan</p>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=renovacion-full-assets-performance-19-no-character-frames"></script>
 </body>
 </html>

@@ -139,9 +139,20 @@
 
   // ========== SPRITES ==========
   const sprites = {};
+  let mainPlayerSpriteReady = false;
+  let mainPlayerSpriteError = false;
   window.sprites = sprites;
   const RUTAS = {
-    'jugador': 'assets/vagabundo-sprite-pack/body-idle.png',
+    'jugador': 'assets/drakzeth/player-lpc/standard/idle.png',
+    'jugador-principal': 'assets/drakzeth/player-lpc/standard/idle.png',
+    'jugador-principal-idle': 'assets/drakzeth/player-lpc/standard/idle.png',
+    'jugador-principal-walk': 'assets/drakzeth/player-lpc/standard/walk.png',
+    'jugador-principal-run': 'assets/drakzeth/player-lpc/standard/run.png',
+    'jugador-principal-attack-light': 'assets/drakzeth/player-lpc/standard/slash.png',
+    'jugador-principal-attack-heavy': 'assets/drakzeth/player-lpc/standard/1h_backslash.png',
+    'jugador-principal-cast': 'assets/drakzeth/player-lpc/standard/spellcast.png',
+    'jugador-principal-hit': 'assets/drakzeth/player-lpc/standard/hurt.png',
+    'jugador-principal-death': 'assets/drakzeth/player-lpc/standard/jump.png',
     'jugador-idle': 'assets/vagabundo-sprite-pack/body-idle.png',
     'jugador-walk': 'assets/vagabundo-sprite-pack/body-walk.png',
     'jugador-run': 'assets/vagabundo-sprite-pack/body-run.png',
@@ -201,18 +212,58 @@
   RUTAS['weapon-riosdesangre-fallback'] = 'assets/vagabundo-weapons-ultimate/ultimate-riosdesangre.png';
   RUTAS['fx-riosdesangre-slash'] = 'assets/vagabundo-riosdesangre-replacement/fx-riosdesangre-slash.png';
 
-  // Spritesheet modular: filas = S, SW, W, NW, N, NE, E, SE; celdas = 200x200.
-  const VAGABUNDO_ANIMS = {
-    idle: { key:'jugador-idle', columns:4, fps:6 },
-    walk: { key:'jugador-walk', columns:8, fps:10 },
-    run: { key:'jugador-run', columns:8, fps:14 },
-    'attack-light': { key:'jugador-attack-light', columns:6, fps:10 },
-    'attack-heavy': { key:'jugador-attack-heavy', columns:8, fps:9 },
-    cast: { key:'jugador-cast', columns:8, fps:12 },
-    hit: { key:'jugador-hit', columns:4, fps:10 },
-    death: { key:'jugador-death', columns:8, fps:8 }
+  // Renovación visual curada: no altera al jugador LPC ni a los jefes.
+  const RENEWAL_WEAPON_IDS = ['espadalarga','katana','granespada','daga','lanza','arco','ballesta','baston','sello','riosdesangre','colmillosabueso','espadablasfema','espadonluna','martillorubi','escudo'];
+  RENEWAL_WEAPON_IDS.forEach(function(id){ RUTAS['renewal-weapon-'+id] = 'assets/drakzeth/renewal/ui/'+id+'.png'; });
+  const RENEWAL_ENEMY_IDS = ['soldier','orc','demon','bloodmonster'];
+  const RENEWAL_ENEMY_ACTIONS = ['Idle','Walk','Attack01','Attack02','Hurt','Death'];
+  RENEWAL_ENEMY_IDS.forEach(function(id){ RENEWAL_ENEMY_ACTIONS.forEach(function(action){ RUTAS['renewal-enemy-'+id+'-'+action] = 'assets/drakzeth/renewal/enemies/'+id+'-'+action+'.png'; }); });
+  const RENEWAL_FX_FILES = {
+    hit:'assets/drakzeth/renewal/fx/hit-effect-strip.png',
+    explosion:'assets/drakzeth/renewal/fx/explosion-effect-strip.png',
+    fire:'assets/drakzeth/renewal/fx/fire-explosion-strip.png',
+    smear:'assets/drakzeth/renewal/fx/smear-horizontal.png',
+    smearV:'assets/drakzeth/renewal/fx/smear-vertical.png',
+    holy:'assets/drakzeth/renewal/fx/holy-repeatable-strip.png',
+    thunder:'assets/drakzeth/renewal/fx/thunder-strike-strip.png',
+    thunderAlt:'assets/drakzeth/renewal/fx/thunder-strip.png',
+    meteorExplosion:'assets/drakzeth/renewal/fx/explosion-meteor-03.png',
+    crystal:'assets/drakzeth/renewal/fx/crystal-strip.png',
+    auraMarea:'assets/drakzeth/renewal/fx/aura-marea-38.png',
+    mirror:'assets/drakzeth/renewal/fx/magic-mirror-strip.png',
+    projectile:'assets/drakzeth/renewal/fx/projectile-strip.png',
+    smoke:'assets/drakzeth/renewal/fx/smoke-frame.png'
   };
+  Object.keys(RENEWAL_FX_FILES).forEach(function(id){ RUTAS['renewal-fx-'+id] = RENEWAL_FX_FILES[id]; });
+  const HOLY_ULTIMATE_FILES = [
+    'assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-01.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-02.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-03.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-04.png',
+    'assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-05.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-06.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-07.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-08.png',
+    'assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-09.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-10.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-11.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-12.png',
+    'assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-13.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-14.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-15.png','assets/drakzeth/renewal/fx/holy-ultimate/holy-ultimate-16.png'
+  ];
+  HOLY_ULTIMATE_FILES.forEach(function(path,i){ RUTAS['holy-ultimate-'+String(i+1).padStart(2,'0')] = path; });
+  RUTAS['renewal-world-ground'] = 'assets/drakzeth/renewal/world/undead-ground-atlas.png';
+  RUTAS['renewal-ground-tile'] = 'assets/drakzeth/renewal/world/ground-tile.png';
+  RUTAS['renewal-world-cave'] = 'assets/drakzeth/renewal/world/cave-objects-atlas.png';
+  RUTAS['renewal-world-objects'] = 'assets/drakzeth/renewal/world/undead-objects-atlas.png';
 
+  // Atlas LPC muscular: cada acción es una hoja de 64×64 con 13 columnas y 4 direcciones.
+  // Se usan solo los cuadros ocupados confirmados del ZIP nuevo.
+  const VAGABUNDO_ANIMS = {
+    idle: { key:'jugador-principal-idle', columns:2, fps:7, lpc:true, sourceW:64, sourceH:64 },
+    walk: { key:'jugador-principal-walk', columns:9, fps:12, lpc:true, sourceW:64, sourceH:64 },
+    run: { key:'jugador-principal-run', columns:8, fps:16, lpc:true, sourceW:64, sourceH:64 },
+    'attack-light': { key:'jugador-principal-attack-light', columns:6, fps:14, lpc:true, sourceW:64, sourceH:64 },
+    'attack-heavy': { key:'jugador-principal-attack-heavy', columns:13, fps:12, lpc:true, sourceW:64, sourceH:64 },
+    cast: { key:'jugador-principal-cast', columns:7, fps:14, lpc:true, sourceW:64, sourceH:64 },
+    hit: { key:'jugador-principal-hit', columns:6, fps:12, lpc:true, sourceW:64, sourceH:64 },
+    death: { key:'jugador-principal-death', columns:5, fps:10, lpc:true, sourceW:64, sourceH:64 }
+  };
+  const MAIN_PLAYER_KEYS = Object.keys(VAGABUNDO_ANIMS).map(function(action){ return VAGABUNDO_ANIMS[action].key; });
+  const MAIN_PLAYER_REQUIRED_KEYS = ['jugador-principal-idle','jugador-principal-walk'];
+    // LPC estándar: filas físicas en orden arriba, izquierda, abajo, derecha.
+  // El movimiento lógico usa 8 sectores, aproximando diagonales a la cardinal más cercana.
+  const LPC_DIRECTION_ROWS = [2,2,1,0,0,0,3,2];
   function vagabundoDirectionRow(x, y){
     if(y > 0.35) return x < -0.35 ? 1 : x > 0.35 ? 7 : 0;
     if(y < -0.35) return x < -0.35 ? 3 : x > 0.35 ? 5 : 4;
@@ -222,16 +273,33 @@
   function drawVagabundo(x, y, bob){
     const playerAnim = player && player.anim && VAGABUNDO_ANIMS[player.anim] ? player.anim : 'idle';
     const spec = VAGABUNDO_ANIMS[playerAnim];
-    const img = spr(spec.key);
-    if(!img) return drawSpr('jugador', x, y, 64, 64, player && player.facing < 0);
-    const row = player && Number.isFinite(player.dirRow) ? player.dirRow : 6;
+    const loadedActionImg = spr(spec.key);
+    const img = loadedActionImg || spr(VAGABUNDO_ANIMS.idle.key);
+    const renderSpec = loadedActionImg ? spec : VAGABUNDO_ANIMS.idle;
+    if(!img){
+      ctx.save(); ctx.fillStyle=mainPlayerSpriteError?'#7f1d35':'#ff8294'; ctx.strokeStyle='#ffd1d8'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(x,y-13,9,0,Math.PI*2); ctx.fill(); ctx.stroke(); ctx.fillRect(x-9,y-4,18,25); ctx.restore();
+      return true;
+    }
     const start = player && Number.isFinite(player.animStart) ? player.animStart : animT;
-    const frameDuration = Math.max(1, Math.round(60 / spec.fps));
+    const frameDuration = Math.max(1, Math.round(60 / renderSpec.fps));
     const elapsed = playerAnim === 'idle' ? animT : Math.max(0, animT - start);
-    const frame = Math.min(spec.columns - 1, Math.floor(elapsed / frameDuration) % spec.columns);
+    const frame = Math.min(renderSpec.columns - 1, Math.floor(elapsed / frameDuration) % renderSpec.columns);
     ctx.save();
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(img, frame * 200, row * 200, 200, 200, x - 32, y + bob - 32, 64, 64);
+    if(renderSpec.lpc){
+      const rawRow = player && Number.isFinite(player.dirRow) ? player.dirRow : 6;
+      const availableRows=Math.max(1,Math.floor((img.naturalHeight||renderSpec.sourceH)/renderSpec.sourceH));
+      const logicalRow=LPC_DIRECTION_ROWS[Math.max(0, Math.min(7, rawRow))];
+      const row=availableRows>1 ? Math.min(availableRows-1,logicalRow) : 0;
+      ctx.drawImage(img, frame*renderSpec.sourceW, row*renderSpec.sourceH, renderSpec.sourceW, renderSpec.sourceH, x - 38, y + bob - 38, 76, 76);
+    } else if(renderSpec.atlas){
+      const sx=renderSpec.startX + frame*renderSpec.stepX, sy=renderSpec.startY;
+      ctx.drawImage(img, sx, sy, renderSpec.sourceW, renderSpec.sourceH, x - 38, y + bob - 38, 76, 76);
+    } else {
+      const row = player && Number.isFinite(player.dirRow) ? player.dirRow : 6;
+      ctx.drawImage(img, frame * 200, row * 200, 200, 200, x - 32, y + bob - 32, 64, 64);
+    }
     ctx.restore();
     return true;
   }
@@ -280,7 +348,47 @@
     return ULTIMATE_WEAPON_FILES[id] ? 'weapon-'+id : null;
   }
 
+  const RENEWAL_WEAPON_HAND_PROFILES = {
+    espadalarga:{size:126,grip:.22,angle:0}, katana:{size:122,grip:.22,angle:0}, riosdesangre:{size:126,grip:.22,angle:0},
+    daga:{size:96,grip:.18,angle:0}, lanza:{size:148,grip:.28,angle:0}, arco:{size:118,grip:.05,angle:-.16}, ballesta:{size:112,grip:.06,angle:-.12},
+    granespada:{size:156,grip:.27,angle:0}, espadonluna:{size:154,grip:.27,angle:0}, martillorubi:{size:142,grip:.2,angle:0},
+    colmillosabueso:{size:132,grip:.24,angle:0}, espadablasfema:{size:138,grip:.24,angle:0}, baston:{size:126,grip:.22,angle:0}, sello:{size:106,grip:.1,angle:0}, escudo:{size:112,grip:.02,angle:0}
+  };
+  function drawRenewalWeaponIcon(x, y, bob){
+    if(!player) return false;
+    const id=player.weapon, img=spr('renewal-weapon-'+id);
+    if(!img) return false;
+    const action=weaponActionForPlayer();
+    const rawRow=Number.isFinite(player.dirRow) ? Math.max(0,Math.min(7,player.dirRow)) : 6;
+    // El índice lógico del movimiento es: abajo, abajo-izquierda, izquierda, arriba-izquierda, arriba, arriba-derecha, derecha, abajo-derecha.
+    const dirAngles=[Math.PI/2,3*Math.PI/4,Math.PI,-3*Math.PI/4,-Math.PI/2,-Math.PI/4,0,Math.PI/4];
+    const dirAngle=dirAngles[rawRow];
+    const start=Number.isFinite(player.animStart) ? player.animStart : animT;
+    const elapsed=Math.max(0,animT-start);
+    const attackAction=action.indexOf('attack')===0 || action==='cast';
+    const progress=attackAction ? Math.min(1,elapsed/22) : 0;
+    const swing=attackAction ? Math.sin(progress*Math.PI)*0.52 : Math.sin(animT*.08)*.035;
+    const w=getWeapon();
+    const profile=RENEWAL_WEAPON_HAND_PROFILES[id]||{size:116,grip:.22,angle:0};
+    const size=action==='cast' ? Math.max(profile.size,120) : (attackAction ? Math.max(profile.size,profile.size+14) : profile.size);
+    // Mano aproximada dentro del cuadro LPC; el centro del icono se adelanta según su largo para que el mango quede en la mano.
+    const handDistance=id==='escudo'?8:16;
+    const handX=x+Math.cos(dirAngle)*handDistance;
+    const handY=y+bob+Math.sin(dirAngle)*handDistance;
+    const centerDistance=size*profile.grip;
+    ctx.save();
+    ctx.imageSmoothingEnabled=false;
+    ctx.translate(handX+Math.cos(dirAngle)*centerDistance,handY+Math.sin(dirAngle)*centerDistance);
+    ctx.rotate(dirAngle+Math.PI/2+profile.angle+swing);
+    ctx.globalAlpha=.96;
+    ctx.shadowColor=(w&&w.color)||'#ff4f70'; ctx.shadowBlur=action==='cast'?9:4;
+    ctx.drawImage(img,-size/2,-size/2,size,size);
+    ctx.restore();
+    return true;
+  }
+
   function drawWeapon(x, y, bob){
+    if(drawRenewalWeaponIcon(x,y,bob)) return true;
     if(!player) return false;
     const action = weaponActionForPlayer();
     const spec = WEAPON_ANIM_SPECS[action] || WEAPON_ANIM_SPECS.idle;
@@ -316,13 +424,23 @@
     return true;
   }
 
+  function updatePlayerAssetStatus(){
+    const btn=$('surv-start-btn');
+    if(!btn) return;
+    mainPlayerSpriteReady = MAIN_PLAYER_REQUIRED_KEYS.every(function(key){ return !!sprites[key]; });
+    btn.disabled=!mainPlayerSpriteReady;
+    if(mainPlayerSpriteReady) btn.textContent='COMENZAR SUPERVIVENCIA';
+    else if(mainPlayerSpriteError) btn.textContent='ERROR DEL PERSONAJE · RECARGA';
+    else btn.textContent='CARGANDO PERSONAJE...';
+  }
   (function loadSprites(){
     Object.keys(RUTAS).forEach(function(k){
       const img = new Image();
-      img.onload = function(){ sprites[k]=img; };
-      img.onerror = function(){ sprites[k]=null; };
+      img.onload = function(){ sprites[k]=img; if(MAIN_PLAYER_KEYS.indexOf(k)>=0) updatePlayerAssetStatus(); };
+      img.onerror = function(){ sprites[k]=null; if(MAIN_PLAYER_REQUIRED_KEYS.indexOf(k)>=0){ mainPlayerSpriteError=true; updatePlayerAssetStatus(); } };
       img.src = RUTAS[k];
     });
+    setTimeout(updatePlayerAssetStatus,0);
   })();
 
   function spr(k){ return sprites[k]||null; }
@@ -330,6 +448,36 @@
     const img=spr(k); if(!img) return false;
     ctx.save(); ctx.translate(x,y); if(flip) ctx.scale(-1,1);
     ctx.drawImage(img,-w/2,-h/2,w,h); ctx.restore(); return true;
+  }
+
+  const RENEWAL_ENEMY_ANIM_SPEC = { sourceW:100, sourceH:100, fps:{Idle:7,Walk:10,Attack01:14,Attack02:12,Hurt:12,Death:8} };
+  function renewalEnemyAction(e){
+    if(e.hp<=0) return 'Death';
+    if(e.hitFlash>0) return 'Hurt';
+    if(e.chargeTimer>0 || (e.shootCd>0 && e.shootCd<8) || (e.magicCd>0 && e.magicCd<8)) return e.renewalAttackMode||'Attack01';
+    return e.frozen>0 ? 'Idle' : 'Walk';
+  }
+  function drawRenewalEnemy(e,x,y){
+    if(!e || !e.renewalProfile) return false;
+    const action=renewalEnemyAction(e), spec=RENEWAL_ENEMY_ANIM_SPEC;
+    const img=spr('renewal-enemy-'+e.renewalProfile+'-'+action) || spr('renewal-enemy-'+e.renewalProfile+'-Idle');
+    if(!img) return false;
+    if(e._renewalLastAction!==action){ e._renewalLastAction=action; e.renewalAnimStart=animT; }
+    const fps=spec.fps[action]||8;
+    const columns=Math.max(1,Math.floor((img.naturalWidth||spec.sourceW)/spec.sourceW));
+    const start=Number.isFinite(e.renewalAnimStart)?e.renewalAnimStart:animT;
+    const frame=Math.floor(Math.max(0,animT-start)/(Math.max(1,Math.round(60/fps))))%columns;
+    ctx.save();
+    ctx.imageSmoothingEnabled=false;
+    ctx.translate(x,y);
+    if(player && e.x>player.x) ctx.scale(-1,1);
+    // Las celdas del paquete reservan mucho espacio transparente. Los comunes igualan la presencia visual del jugador LPC; los grandes/colosos triplican esa escala. La colisión no cambia.
+    const normalCharacterScale=420;
+    const drawSize=e.large ? normalCharacterScale*3 : normalCharacterScale;
+    ctx.drawImage(img,frame*spec.sourceW,0,spec.sourceW,spec.sourceH,-drawSize/2,-drawSize/2,drawSize,drawSize);
+    if(e.enraged){ ctx.globalAlpha=.4+Math.sin(animT*.2)*.12; ctx.globalCompositeOperation='lighter'; ctx.strokeStyle='#ff3d67'; ctx.lineWidth=3; ctx.shadowColor='#ff3d67'; ctx.shadowBlur=12; ctx.beginPath(); ctx.arc(0,0,e.r*1.35,0,Math.PI*2); ctx.stroke(); }
+    ctx.restore();
+    return true;
   }
 
   // ========== WEAPONS ==========
@@ -410,9 +558,13 @@
     { id:'sanador', hp:110, dmg:5, spd:0.82, r:21, spr:'ene-espiritu', color:'#d58a9d', xp:36, mage:true, ranged:true, range:330, role:'healer', healCd:270 },
     { id:'mimico', hp:135, dmg:12, spd:1.08, r:23, spr:'ene-espiritu', color:'#b47bd4', xp:40, mage:true, ranged:true, range:360, role:'mimic', copyCd:300 }
   ];
+  const RENEWAL_ENEMY_PROFILE = {
+    soldado:'soldier', lobo:'bloodmonster', caballero:'orc', espiritu:'demon', arquero:'soldier', oraculo:'demon',
+    troll:'orc', coloso:'orc', guardian:'orc', invocador:'demon', asesino:'bloodmonster', embestidora:'bloodmonster', sanador:'demon', mimico:'bloodmonster'
+  };
   let checkpoints = [];
   let pendingLevelPts = 0;
-  let settings = { volume: 0.7, brightness: 1, shake: true };
+  let settings = { volume: 0.7, brightness: 1, shake: true, performanceMode: false };
   try { settings = Object.assign(settings, JSON.parse(localStorage.getItem('er_surv_settings')||'{}')); } catch(e){}
 
 
@@ -451,9 +603,24 @@
   let mapDecor = [];
   const decorImages = {};
   const DECOR_ASSETS = [
-    'assets/objeto-arbol-oscuro.png','assets/objeto-arbusto.png','assets/objeto-barril.png','assets/objeto-cofre.png','assets/objeto-lapida.png',
-    'assets/elden-texture-pack/objetos/altar-runa.png','assets/elden-texture-pack/objetos/columna-rota.png','assets/elden-texture-pack/objetos/restos-estructura.png',
-    'assets/drakzeth/characters/aurelia.png','assets/drakzeth/characters/kaelor.png','assets/drakzeth/characters/morvane.png','assets/drakzeth/characters/nysera.png','assets/drakzeth/characters/solarys.png','assets/drakzeth/characters/elyria.png'
+    {src:'assets/objeto-arbol-oscuro.png',w:78,h:78,alpha:.94,kind:'ruin'},
+    {src:'assets/objeto-arbusto.png',w:66,h:58,alpha:.92,kind:'nature'},
+    {src:'assets/objeto-barril.png',w:52,h:58,alpha:.96,kind:'prop'},
+    {src:'assets/objeto-cofre.png',w:72,h:58,alpha:1,kind:'chest'},
+    {src:'assets/objeto-lapida.png',w:56,h:76,alpha:.96,kind:'grave'},
+    {src:'assets/elden-texture-pack/objetos/altar-runa.png',w:104,h:104,alpha:1,kind:'altar'},
+    {src:'assets/elden-texture-pack/objetos/columna-rota.png',w:88,h:126,alpha:.95,kind:'ruin'},
+    {src:'assets/elden-texture-pack/objetos/restos-estructura.png',w:118,h:88,alpha:.95,kind:'ruin'},
+    {src:'assets/drakzeth/renewal/ui/relic-heart.png',w:48,h:48,alpha:1,kind:'relic'},
+    {src:'assets/drakzeth/renewal/ui/relic-dagger.png',w:48,h:48,alpha:1,kind:'relic'},
+    {src:'assets/drakzeth/renewal/world/teleport.png',sx:0,sy:0,sw:256,sh:128,w:94,h:70,alpha:1,kind:'teleport'},
+    {src:'assets/drakzeth/renewal/world/undead-objects-atlas.png',sx:0,sy:0,sw:192,sh:128,w:132,h:88,alpha:.98,kind:'ruin'},
+    {src:'assets/drakzeth/renewal/world/undead-objects-atlas.png',sx:192,sy:128,sw:192,sh:128,w:124,h:84,alpha:.98,kind:'ruin'},
+    {src:'assets/drakzeth/renewal/world/undead-objects-atlas.png',sx:0,sy:384,sw:192,sh:128,w:120,h:82,alpha:.96,kind:'stone'},
+    {src:'assets/drakzeth/renewal/world/cave-objects-atlas.png',sx:312,sy:0,sw:78,sh:156,w:78,h:144,alpha:1,kind:'crystal'},
+    {src:'assets/drakzeth/renewal/world/cave-objects-atlas.png',sx:468,sy:0,sw:78,sh:156,w:78,h:144,alpha:1,kind:'altar'},
+    {src:'assets/drakzeth/renewal/world/cave-objects-atlas.png',sx:312,sy:468,sw:156,sh:156,w:132,h:132,alpha:1,kind:'ritual'},
+    {src:'assets/drakzeth/renewal/world/cave-objects-atlas.png',sx:468,sy:624,sw:156,sh:156,w:118,h:118,alpha:1,kind:'fire'}
   ];
   let luckyTriple = false;
 
@@ -1051,14 +1218,21 @@
 
   function initMapDecor(){
     mapDecor=[];
-    DECOR_ASSETS.forEach(function(src){ if(!decorImages[src]){ decorImages[src]=new Image(); decorImages[src].src=src; } });
-    const count=46;
+    DECOR_ASSETS.forEach(function(spec){ if(!decorImages[spec.src]){ decorImages[spec.src]=new Image(); decorImages[spec.src].src=spec.src; } });
+    const count=settings.performanceMode?30:68;
     for(let i=0;i<count;i++){
-      const src=DECOR_ASSETS[Math.floor(Math.random()*DECOR_ASSETS.length)], character=src.indexOf('/characters/')>=0;
+      const spec=DECOR_ASSETS[Math.floor(Math.random()*DECOR_ASSETS.length)], character=!!spec.character;
       const x=70+Math.random()*(MAP_W-140), y=70+Math.random()*(MAP_H-140);
-      if(player && Math.hypot(x-player.x,y-player.y)<170){ i--; continue; }
-      mapDecor.push({x:x,y:y,src:src,w:character?58:34+Math.random()*26,h:character?78:34+Math.random()*26,alpha:character ? .78 : .88,character:character});
+      if(player && Math.hypot(x-player.x,y-player.y)<190){ i--; continue; }
+      mapDecor.push({x:x,y:y,src:spec.src,sx:spec.sx,sy:spec.sy,sw:spec.sw,sh:spec.sh,w:spec.w,h:spec.h,alpha:spec.alpha,character:character,kind:spec.kind});
     }
+    const landmarkKinds=['altar','chest','teleport','ritual','crystal','fire'];
+    const landmarkPoints=[[260,260],[1740,260],[260,1740],[1740,1740],[1000,260],[1000,1740]];
+    landmarkKinds.forEach(function(kind,idx){
+      const spec=DECOR_ASSETS.find(function(item){ return item.kind===kind; });
+      if(!spec) return;
+      mapDecor.push({x:landmarkPoints[idx][0],y:landmarkPoints[idx][1],src:spec.src,sx:spec.sx,sy:spec.sy,sw:spec.sw,sh:spec.sh,w:spec.w,h:spec.h,alpha:spec.alpha,character:!!spec.character,kind:kind,landmark:true});
+    });
   }
   function updateMoonUI(){
     const el = $('surv-moon');
@@ -1173,7 +1347,8 @@
         const btn = document.createElement('button');
         btn.className = 'btn-juego btn-juego--peque';
         btn.style.minWidth = '160px';
-        btn.innerHTML = '<b>'+r.label+'</b><br><span style="font-size:0.8rem;opacity:0.8">'+r.desc+'</span>';
+        const rewardIcon = r.tipo==='arma' ? '<img class="reward-weapon-icon" src="assets/drakzeth/renewal/ui/'+r.id+'.png" alt="">' : '<span class="reward-glyph">✦</span>';
+        btn.innerHTML = rewardIcon+'<b>'+r.label+'</b><br><span style="font-size:0.8rem;opacity:0.8">'+r.desc+'</span>';
         btn.onclick = function(){ claimReward(idx); };
         opts.appendChild(btn);
       });
@@ -1300,7 +1475,8 @@
       const range = w.range * rangeMul;
       const hx = player.x + Math.cos(ang)*range*0.62;
       const hy = player.y + Math.sin(ang)*range*0.62;
-      slashFX.push({x:hx, y:hy, life:slashLife, max:slashLife, ang:ang, color:w.color});
+            slashFX.push({x:hx, y:hy, life:slashLife, max:slashLife, ang:ang, color:w.color});
+      spawnRenewalFX('smear',hx,hy,ang,player.comboStep===0?108:128);
       const hitW = { dmg: w.dmg * dmgMul, crit: (w.crit || 0) + (player.weapon==='daga' && player.justDodgedTimer>0 ? .9 : 0), heavy: player.comboStep===0, weaponId:player.weapon, posture: player.comboStep===0 ? 22 : (player.comboStep===1 ? 7 : 11) };
       let hit=false;
       for(let i=0;i<enemies.length;i++){
@@ -1350,6 +1526,7 @@
     if(playerHasCurse('bloodHungry')) dmg*=1.25;
     if(w.crit && Math.random()<0.18){ dmg*=w.crit; showFT('CRÍTICO', e.x, e.y-30, '#ffeb3b'); }
     e.hp -= dmg; e.hitFlash=6;
+    spawnRenewalFX('hit',e.x,e.y,Math.random()*Math.PI*2,Math.max(58,e.r*3.1));
     applyPostureDamage(e,postureDamageForHit(w));
     applyWeaponPassive(e,weaponId,w,dmg);
     showFT(stateOf(e).vulnerable>0 ? 'RUPTURA -'+Math.round(dmg) : '-'+Math.round(dmg), e.x, e.y-20, stateOf(e).vulnerable>0 ? '#ffd1d8' : '#f0d99a');
@@ -1422,6 +1599,8 @@
       const a=Math.random()*Math.PI*2, d=70+Math.random()*190;
       const x=Math.max(radius,Math.min(MAP_W-radius,player.x+Math.cos(a)*d)), y=Math.max(radius,Math.min(MAP_H-radius,player.y+Math.sin(a)*d));
       arenaHazards.push({x:x,y:y,r:radius,life:70,maxLife:70,impactAt:18,type:'meteor',color:color,dmg:e.dmg*(e.id==='coloso'?.95:.72),hit:false,source:'enraged'});
+      spawnRenewalFX('thunder',x,y,0,e.id==='coloso'?226:194);
+      spawnRenewalFX('crystal',x,y,0,e.id==='coloso'?248:210);
     }
     if(arenaHazards.length>14) arenaHazards.splice(0,arenaHazards.length-14);
     dragonFX.push({type:'rainTelegraph',x:e.x,y:e.y,life:44,maxLife:44,radius:e.id==='coloso'?150:112});
@@ -1435,7 +1614,9 @@
         const struck=Math.hypot(player.x-h.x,player.y-h.y)<h.r+player.r;
         if(struck) onPlayerHit(h.dmg,true);
         if(h.type==='petals' && h.healOnHit && struck && boss && boss.hp>0) boss.hp=Math.min(boss.maxHp,boss.hp+boss.maxHp*.012);
-        spawnP(h.x,h.y,h.color,18); dragonFX.push({type:'markBurst',x:h.x,y:h.y,life:22,maxLife:22,radius:h.r}); triggerScreenShake(8,5);
+        spawnP(h.x,h.y,h.color,18);
+        if(h.type==='meteor'){ spawnRenewalFX('meteorExplosion',h.x,h.y,0,h.r>=54?260:224,180,false); }
+        dragonFX.push({type:'markBurst',x:h.x,y:h.y,life:22,maxLife:22,radius:h.r}); triggerScreenShake(8,5);
       }
       if(h.life<=0) arenaHazards.splice(i,1);
     }
@@ -1486,7 +1667,7 @@
     enemies.push({
       id:t.id, role:t.role||'', x:player.x+Math.cos(ang)*dist, y:player.y+Math.sin(ang)*dist,
       hp:t.hp*mul*gMul*eMul, maxHp:t.hp*mul*gMul*eMul, dmg:t.dmg*mul*gMul*bMul*(elite?1.3:1),
-      spd:t.spd*(bloodMoon?1.08:1)*(elite?0.9:1), r:r, spr:t.spr, color:elite?'#d9b25c':t.color,
+      spd:t.spd*(bloodMoon?1.08:1)*(elite?0.9:1), r:r, spr:t.spr, renewalProfile:RENEWAL_ENEMY_PROFILE[t.id]||null, renewalAttackMode:Math.random()<.5?'Attack01':'Attack02', renewalAnimStart:animT, color:elite?'#d9b25c':t.color,
       cd:0, hitFlash:0, xp:t.xp||12, mage:!!t.mage, ranged:!!t.ranged, range:t.range||280, aoe:!!t.aoe, elite:elite, large:!!t.large, frozen:0, shootCd:0, magicCd:t.magicCd||150,
       postureMax:Math.round((t.large?150:90)*(elite?1.2:1)), posture:Math.round((t.large?150:90)*(elite?1.2:1)), postureBroken:0, barrier:0, barrierPower:1, shieldFactor:t.shieldFactor||1, guardAngle:0, guardTurnCd:0,
       stealth:0, stealthCd:t.stealthCd||0, chargeTimer:0, chargeCd:t.chargeCd||0, chargeDX:0, chargeDY:0, barrierCd:t.barrierCd||0, healCd:t.healCd||0, copyCd:t.copyCd||0, bleedTimer:0, bleedDamage:0, hunterMark:0, suppressionHits:0,
@@ -1512,21 +1693,26 @@
       if(d<210) onPlayerHit(e.dmg*.72,false);
       dragonFX.push({type:'roar',x:e.x,y:e.y,life:28,maxLife:28,radius:120,spin:0});
     } else if(skill==='breath'){
-      projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*5.1,vy:Math.sin(ang)*5.1,dmg:e.dmg*.68,r:7,life:90,color:'#b47bd4',fromPlayer:false,magic:true});
+      projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*5.1,vy:Math.sin(ang)*5.1,dmg:e.dmg*.68,r:7,life:90,color:'#b47bd4',fromPlayer:false,magic:true,magicFxType:'fire',magicFxSize:210});
+      spawnRenewalFX('fire',e.x,e.y,ang,210);
     } else if(skill==='flight'){
       e.x=Math.max(e.r,Math.min(MAP_W-e.r,e.x+Math.cos(ang)*110)); e.y=Math.max(e.r,Math.min(MAP_H-e.r,e.y+Math.sin(ang)*110));
       if(Math.hypot(player.x-e.x,player.y-e.y)<e.r+player.r+30) onPlayerHit(e.dmg*.85,false);
     } else {
-      projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*4.4,vy:Math.sin(ang)*4.4,dmg:e.dmg*.62,r:8,life:100,color:'#b47bd4',fromPlayer:false,magic:true});
-      spawnP(e.x,e.y,'#b47bd4',10);
+      projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*4.4,vy:Math.sin(ang)*4.4,dmg:e.dmg*.62,r:8,life:100,color:'#b47bd4',fromPlayer:false,magic:true,magicFxType:'holy',magicFxSize:196});
+      spawnRenewalFX('holy',e.x,e.y,ang,196); spawnP(e.x,e.y,'#b47bd4',12);
     }
     showFT('MÍMICA · '+skill.toUpperCase(),e.x,e.y-e.r-20,'#d8b4ff');
   }
   function enemyMagicBurst(e){
     if(!e || e.hp<=0) return;
     const base=Math.atan2(player.y-e.y,player.x-e.x), count=e.ranged?1:3, spread=e.ranged?0:.22;
-    for(let i=0;i<count;i++){ const a=base+(i-(count-1)/2)*spread; projectiles.push({x:e.x,y:e.y,vx:Math.cos(a)*(e.ranged?5.3:4.2),vy:Math.sin(a)*(e.ranged?5.3:4.2),dmg:e.dmg*(e.ranged?.48:.62),r:e.ranged?5:7,life:110,color:e.ranged?'#d47a8f':'#9b87d6',fromPlayer:false,magic:true}); }
-    spawnP(e.x,e.y,e.ranged?'#d47a8f':'#9b87d6',8);
+    const fxType=e.ranged?'thunder':'holy', fxSize=e.ranged?178:214;
+    for(let i=0;i<count;i++){ const a=base+(i-(count-1)/2)*spread; projectiles.push({x:e.x,y:e.y,vx:Math.cos(a)*(e.ranged?5.3:4.2),vy:Math.sin(a)*(e.ranged?5.3:4.2),dmg:e.dmg*(e.ranged?.48:.62),r:e.ranged?5:7,life:110,color:e.ranged?'#d47a8f':'#9b87d6',fromPlayer:false,magic:true,magicFxType:fxType,magicFxSize:fxSize}); }
+    spawnRenewalFX(fxType,e.x,e.y,base,fxSize);
+    if(e.ranged) spawnRenewalFX('projectile',e.x+Math.cos(base)*26,e.y+Math.sin(base)*26,base,142);
+    else spawnRenewalFX('crystal',e.x,e.y,0,178);
+    spawnP(e.x,e.y,e.ranged?'#d47a8f':'#9b87d6',12);
   }
 
   // ========== UPDATE ==========
@@ -1588,11 +1774,11 @@
       player.x += mx * player.spd * player.spdMul * heartSpeed * 60 * dt;
       player.y += my * player.spd * player.spdMul * heartSpeed * 60 * dt;
       player.dirRow = vagabundoDirectionRow(mx, my);
-      if(player.atkCd <= 0 && !player.isParrying){
+      if(player.atkCd <= 0 && player.dragonCast<=0 && !player.isParrying){
         const nextAnim = player.spdMul > 1.25 ? 'run' : 'walk';
         if(player.anim !== nextAnim){ player.anim = nextAnim; player.animStart = animT; }
       }
-    } else if(player.atkCd <= 0 && player.anim !== 'idle' && !player.isParrying){
+    } else if(player.atkCd <= 0 && player.dragonCast<=0 && player.anim !== 'idle' && !player.isParrying){
       player.anim = 'idle'; player.animStart = animT;
     }
     player.x = Math.max(player.r, Math.min(MAP_W-player.r, player.x));
@@ -1671,7 +1857,9 @@
         if(e.shootCd<=0){
           e.shootCd = e.ranged ? 110 : 90;
           const ang=Math.atan2(dy,dx);
-          projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*(e.ranged?5.2:4.2),vy:Math.sin(ang)*(e.ranged?5.2:4.2),dmg:e.dmg*(e.ranged?.62:.85),r:e.ranged?5:6,life:90,color:e.ranged?'#d47a8f':'#4dd0e1',fromPlayer:false});
+          projectiles.push({x:e.x,y:e.y,vx:Math.cos(ang)*(e.ranged?5.2:4.2),vy:Math.sin(ang)*(e.ranged?5.2:4.2),dmg:e.dmg*(e.ranged?.62:.85),r:e.ranged?5:6,life:90,color:e.ranged?'#d47a8f':'#4dd0e1',fromPlayer:false,magic:true,magicFxType:e.ranged?'thunder':'holy',magicFxSize:e.ranged?156:184});
+          spawnRenewalFX(e.ranged?'thunder':'holy',e.x,e.y,ang,e.ranged?156:184);
+          spawnRenewalFX(e.ranged?'projectile':'crystal',e.x+Math.cos(ang)*24,e.y+Math.sin(ang)*24,ang,e.ranged?132:166);
         }
       } else if(d > e.r+player.r){
         const anchorMul=stateOf(e).anchored>0?0.42:1;
@@ -1745,6 +1933,8 @@
       } else {
         if(Math.hypot(p.x-player.x,p.y-player.y)<p.r+player.r){
           onPlayerHit(p.dmg, false);
+          if(p.magicFxType) spawnRenewalFX(p.magicFxType,p.x,p.y,Math.atan2(p.vy,p.vx),p.magicFxSize||180);
+          else if(p.magic) spawnRenewalFX('holy',p.x,p.y,Math.atan2(p.vy,p.vx),180);
           projectiles.splice(i,1); continue;
         }
       }
@@ -1783,7 +1973,72 @@
   }
   function spawnP(x,y,col,n){
     for(let i=0;i<n;i++) pushParticle(x,y,(Math.random()-0.5)*4,(Math.random()-0.5)*4-1,1.5+Math.random()*2,col,14+Math.random()*10,false);
-    if(particles.length>60) particles.splice(0, particles.length-60);
+    const particleCap=settings.performanceMode?28:60;
+    if(particles.length>particleCap) particles.splice(0, particles.length-particleCap);
+  }
+  const RENEWAL_FX_SPECS = {
+    hit:{columns:1,rows:7,sourceW:128,sourceH:128,fps:18,size:92},
+    explosion:{columns:1,rows:8,sourceW:128,sourceH:128,fps:16,size:170},
+    fire:{columns:18,rows:1,sourceW:48,sourceH:48,fps:18,size:126},
+    smear:{columns:5,rows:1,sourceW:48,sourceH:48,fps:20,size:108},
+    smearV:{columns:6,rows:1,sourceW:48,sourceH:48,fps:18,size:112},
+    holy:{columns:8,rows:1,sourceW:32,sourceH:32,fps:12,size:86},
+    thunder:{columns:13,rows:1,sourceW:64,sourceH:64,fps:18,size:148},
+    thunderAlt:{columns:8,rows:4,sourceW:64,sourceH:64,fps:16,size:174},
+    meteorExplosion:{columns:4,rows:4,sourceW:128,sourceH:128,fps:16/3,size:236},
+    crystal:{columns:6,rows:1,sourceW:128,sourceH:128,fps:10,size:150},
+    auraMarea:{columns:8,rows:4,sourceW:128,sourceH:128,fps:8,size:520},
+    mirror:{columns:1,rows:10,sourceW:128,sourceH:64,fps:14,size:142},
+    projectile:{columns:4,rows:7,sourceW:64,sourceH:64,fps:16,size:118},
+    smoke:{columns:1,rows:1,sourceW:64,sourceH:64,fps:8,size:112}
+  };
+  let renewalFX=[];
+  let holyUltimateFX=[];
+  function spawnRenewalFX(type,x,y,ang,size,duration,loop){
+    const spec=RENEWAL_FX_SPECS[type];
+    if(!spec || !spr('renewal-fx-'+type)) return;
+    const naturalLife=Math.max(8,Math.ceil(spec.columns*spec.rows*60/spec.fps));
+    const life=Number.isFinite(duration)?Math.max(8,Math.round(duration)):naturalLife;
+    renewalFX.push({type:type,x:x,y:y,ang:ang||0,size:size||spec.size,life:life,maxLife:life,loop:!!loop});
+    const fxCap=settings.performanceMode?12:28;
+    if(renewalFX.length>fxCap) renewalFX.splice(0,renewalFX.length-fxCap);
+  }
+  function drawHolyUltimateFX(){
+    for(let i=holyUltimateFX.length-1;i>=0;i--){
+      const fx=holyUltimateFX[i], elapsed=fx.maxLife-fx.life;
+      const frame=Math.min(15,Math.floor(elapsed/(fx.maxLife/16)));
+      const img=spr('holy-ultimate-'+String(frame+1).padStart(2,'0'));
+      if(img){
+        const progress=elapsed/fx.maxLife;
+        const fade=progress<.08 ? progress/.08 : (progress>.88 ? (1-progress)/.12 : 1);
+        ctx.save(); ctx.translate(fx.x-cam.x,fx.y-cam.y); ctx.globalAlpha=Math.max(0,fade*.96); ctx.globalCompositeOperation='lighter';
+        ctx.shadowColor='#fff1b8'; ctx.shadowBlur=settings.performanceMode?12:22;
+        ctx.drawImage(img,-fx.size/2,-fx.size/2,fx.size,fx.size);
+        ctx.restore();
+      }
+      fx.life--;
+      if(fx.life<=0) holyUltimateFX.splice(i,1);
+    }
+  }
+  function spawnHolyUltimateFX(x,y){
+    holyUltimateFX.push({x:x,y:y,size:540,life:360,maxLife:360});
+    if(holyUltimateFX.length>1) holyUltimateFX.splice(0,holyUltimateFX.length-1);
+  }
+  function drawRenewalFX(){
+    for(let i=renewalFX.length-1;i>=0;i--){
+      const fx=renewalFX[i], spec=RENEWAL_FX_SPECS[fx.type], img=spr('renewal-fx-'+fx.type);
+      if(settings.performanceMode && i%2===0 && fx.type!=='ultimate' && fx.type!=='explosion' && fx.type!=='auraMarea'){ fx.life--; if(fx.life<=0) renewalFX.splice(i,1); continue; }
+      if(!img || !spec){ renewalFX.splice(i,1); continue; }
+      const elapsed=fx.maxLife-fx.life, rawFrame=Math.floor(elapsed/(60/spec.fps)), frame=fx.loop ? rawFrame%(spec.columns*spec.rows) : Math.min(spec.columns*spec.rows-1,rawFrame);
+      const sx=(frame%spec.columns)*spec.sourceW, sy=Math.floor(frame/spec.columns)*spec.sourceH;
+      const fade=Math.min(1,fx.life/8, (elapsed<8?elapsed/8:1));
+      ctx.save(); ctx.translate(fx.x-cam.x,fx.y-cam.y); ctx.rotate(fx.ang||0); ctx.globalAlpha=Math.max(0,fade*.9); ctx.globalCompositeOperation='lighter';
+      const fxColor={thunder:'#9fc8ff',thunderAlt:'#ffd1d8',meteorExplosion:'#ff7a3d',holy:'#fff1f4',crystal:'#72dcff',auraMarea:'#ff79e7',mirror:'#d8b4ff',projectile:'#9fc8ff',smoke:'#ad8894',smearV:'#ff718a'}[fx.type]||'#ff3d67';
+      ctx.shadowColor=fxColor; ctx.shadowBlur=fx.type==='explosion'||fx.type==='meteorExplosion'||fx.type==='crystal'?18:10;
+      ctx.drawImage(img,sx,sy,spec.sourceW,spec.sourceH,-fx.size/2,-fx.size/2,fx.size,fx.size);
+      ctx.restore(); fx.life--;
+      if(fx.life<=0) renewalFX.splice(i,1);
+    }
   }
   function spawnJudgmentLaunch(x,y,ang){
     const cols=['#f0d99a','#d9b25c','#4dd0e1','#ffffff'];
@@ -1858,6 +2113,7 @@
       pushParticle(x,y,Math.cos(a)*speed,Math.sin(a)*speed,1.3+Math.random()*2.8,cols[i%cols.length],20+Math.random()*22,true);
     }
     dragonFX.push({type:'roar',x:x,y:y,life:58,maxLife:58,radius:178,spin:Math.random()*Math.PI*2});
+    spawnRenewalFX('holy',x,y,0,156);
     if(dragonFX.length>10) dragonFX.splice(0,dragonFX.length-10);
   }
 
@@ -1901,6 +2157,7 @@
     player.anim='cast'; player.animStart=animT;
     const hits=dragonConeDamage(player.x,player.y,ang,245,0.55,34);
     spawnDragonBreathFX(player.x,player.y,ang);
+    spawnRenewalFX('fire',player.x+Math.cos(ang)*96,player.y+Math.sin(ang)*96,ang,132);
     triggerScreenShake(hits>0?10:5,hits>0?5:2);
     screenFlash=8;
     showFT('ALIENTO CARMESÍ',player.x+Math.cos(ang)*42,player.y+Math.sin(ang)*42,'#ff4f70');
@@ -1911,6 +2168,7 @@
   function drawDragonEffects(){
     for(let i=0;i<dragonFX.length;i++){
       const fx=dragonFX[i];
+      if(settings.performanceMode && i%2===0 && fx.type!=='ultimate' && fx.type!=='meteorImpact' && fx.type!=='bossUnique') continue;
       const progress=1-(fx.life/fx.maxLife);
       const fade=Math.sin(Math.min(1,progress)*Math.PI);
       const x=fx.x-cam.x, y=fx.y-cam.y;
@@ -2010,29 +2268,29 @@
     const cost=14; if(!dragonReady(player&&player.dragonClawCd,cost)) return;
     player.lastDragonSkill='claw';
     const ang=Math.atan2(mouse.y-(player.y-cam.y),mouse.x-(player.x-cam.x)); player.fp-=cost; player.dragonClawCd=100; player.dragonCast=22; player.anim='attack-heavy'; player.animStart=animT;
-    const hits=dragonConeDamage(player.x,player.y,ang,138,.34,48); dragonFX.push({type:'claw',x:player.x,y:player.y,ang:ang,life:24,maxLife:24,length:138}); triggerScreenShake(hits?9:4,4); showFT('GARRA DEL ABISMO',player.x,player.y-44,'#ff8294');
+    const hits=dragonConeDamage(player.x,player.y,ang,138,.34,48); dragonFX.push({type:'claw',x:player.x,y:player.y,ang:ang,life:24,maxLife:24,length:138}); spawnRenewalFX('smear',player.x+Math.cos(ang)*70,player.y+Math.sin(ang)*70,ang,130); triggerScreenShake(hits?9:4,4); showFT('GARRA DEL ABISMO',player.x,player.y-44,'#ff8294');
   }
   function castDragonFlight(){
     const cost=22; if(!dragonReady(player&&player.dragonFlightCd,cost)) return;
     player.lastDragonSkill='flight';
     const ang=Math.atan2(mouse.y-(player.y-cam.y),mouse.x-(player.x-cam.x)); player.fp-=cost; player.dragonFlightCd=180; player.dragonCast=20; player.invuln=28; const ox=player.x,oy=player.y;
     player.x=Math.max(40,Math.min(MAP_W-40,player.x+Math.cos(ang)*190)); player.y=Math.max(40,Math.min(MAP_H-40,player.y+Math.sin(ang)*190));
-    dragonFX.push({type:'flight',x:ox,y:oy,ang:ang,life:30,maxLife:30,length:190}); dragonAreaDamage(player.x,player.y,64,38,true); triggerScreenShake(8,5); showFT('VUELO DE CENIZA',player.x,player.y-44,'#ff8294');
+    dragonFX.push({type:'flight',x:ox,y:oy,ang:ang,life:30,maxLife:30,length:190}); spawnRenewalFX('explosion',player.x,player.y,0,120); spawnRenewalFX('smoke',ox,oy,ang,132); dragonAreaDamage(player.x,player.y,64,38,true); triggerScreenShake(8,5); showFT('VUELO DE CENIZA',player.x,player.y-44,'#ff8294');
   }
   function castDragonTide(){
     const cost=28; if(!dragonReady(player&&player.dragonTideCd,cost)) return;
     player.lastDragonSkill='tide';
-    player.fp-=cost; player.dragonTideCd=300; player.dragonCast=26; dragonZones.push({type:'tide',x:player.x,y:player.y,radius:214,life:240,pulse:0}); dragonFX.push({type:'tide',x:player.x,y:player.y,life:240,maxLife:240,radius:214}); showFT('MAREA CARMESÍ',player.x,player.y-44,'#ff8294');
+    player.fp-=cost; player.dragonTideCd=300; player.dragonCast=26; dragonZones.push({type:'tide',x:player.x,y:player.y,radius:214,life:240,pulse:0}); spawnRenewalFX('auraMarea',player.x,player.y,0,428,240,false); showFT('MAREA CARMESÍ',player.x,player.y-44,'#ff8294');
   }
   function castDragonMeteor(){
     const cost=36; if(!dragonReady(player&&player.dragonMeteorCd,cost)) return;
     player.lastDragonSkill='meteor';
-    const x=cam.x+mouse.x,y=cam.y+mouse.y; player.fp-=cost; player.dragonMeteorCd=360; player.dragonCast=34; dragonPending.push({type:'meteor',x:Math.max(40,Math.min(MAP_W-40,x)),y:Math.max(40,Math.min(MAP_H-40,y)),life:72,maxLife:72,radius:118}); dragonFX.push({type:'meteorTelegraph',x:x,y:y,life:72,maxLife:72,radius:118}); showFT('METEORITO DEL SELLO',player.x,player.y-44,'#ffd1d8');
+    const x=cam.x+mouse.x,y=cam.y+mouse.y;     player.fp-=cost; player.dragonMeteorCd=360; player.dragonCast=34; dragonPending.push({type:'meteor',x:Math.max(40,Math.min(MAP_W-40,x)),y:Math.max(40,Math.min(MAP_H-40,y)),life:180,maxLife:180,radius:118}); dragonFX.push({type:'meteorTelegraph',x:x,y:y,life:180,maxLife:180,radius:170}); showFT('METEORITO DEL SELLO',player.x,player.y-44,'#ffd1d8');
   }
   function castDragonHeart(){
     const cost=38; if(!dragonReady(player&&player.dragonHeartCd,cost)) return;
     player.lastDragonSkill='heart';
-    player.fp-=cost; player.dragonHeartCd=480; player.dragonHeartTimer=360; player.dragonWard=90; player.anim='cast'; player.animStart=animT; dragonFX.push({type:'heart',x:player.x,y:player.y,life:360,maxLife:360,radius:80}); triggerScreenShake(12,7); showFT('CORAZÓN DEL DRAGÓN',player.x,player.y-44,'#fff1f4');
+    player.fp-=cost; player.dragonHeartCd=480; player.dragonHeartTimer=360; player.dragonWard=90; player.dragonCast=28; player.anim='cast'; player.animStart=animT; dragonFX.push({type:'heart',x:player.x,y:player.y,life:360,maxLife:360,radius:112}); spawnRenewalFX('holy',player.x,player.y,0,170); spawnRenewalFX('mirror',player.x,player.y,0,178); triggerScreenShake(12,7); showFT('CORAZÓN DEL DRAGÓN',player.x,player.y-44,'#fff1f4');
   }
   function castMagicWeaponSkill(){
     if(!player || state!=='PLAYING') return;
@@ -2045,31 +2303,31 @@
     player.fp-=cost; player.magicSkillCd=w.magicSkillCooldown||180; player.dragonCast=26; player.anim='cast'; player.animStart=animT;
     if(player.weapon==='baston'){
       projectiles.push({x:player.x,y:player.y,vx:Math.cos(ang)*12,vy:Math.sin(ang)*12,dmg:76*player.dmgMul,r:9,life:90,color:'#75e8ff',fromPlayer:true,weaponId:'baston',skill:true,posture:28,magicSkill:true});
-      dragonFX.push({type:'magicStaff',x:player.x,y:player.y,ang:ang,life:32,maxLife:32,length:240});
+      dragonFX.push({type:'magicStaff',x:player.x,y:player.y,ang:ang,life:32,maxLife:32,length:240}); spawnRenewalFX('thunder',player.x+Math.cos(ang)*72,player.y+Math.sin(ang)*72,ang,94);
     } else if(player.weapon==='sello'){
       const hits=dragonAreaDamage(player.x+Math.cos(ang)*86,player.y+Math.sin(ang)*86,112,68,false);
       for(let i=0;i<enemies.length;i++){ const e=enemies[i]; if(e.hp>0&&Math.hypot(e.x-player.x,e.y-player.y)<190){ applyCombatState(e,'marked',180); applyPostureDamage(e,26); } }
       if(boss&&boss.hp>0&&Math.hypot(boss.x-player.x,boss.y-player.y)<190){ applyCombatState(boss,'marked',180); applyPostureDamage(boss,26); }
-      dragonFX.push({type:'magicSigil',x:player.x+Math.cos(ang)*86,y:player.y+Math.sin(ang)*86,life:42,maxLife:42,radius:112}); triggerScreenShake(hits?9:4,4);
+      dragonFX.push({type:'magicSigil',x:player.x+Math.cos(ang)*86,y:player.y+Math.sin(ang)*86,life:42,maxLife:42,radius:154}); spawnRenewalFX('holy',player.x+Math.cos(ang)*86,player.y+Math.sin(ang)*86,0,166); spawnRenewalFX('mirror',player.x+Math.cos(ang)*86,player.y+Math.sin(ang)*86,0,148); triggerScreenShake(hits?9:4,4);
     }
     showFT(w.magicSkillName.toUpperCase(),player.x,player.y-48,w.color); updateHUD();
   }
   function castCharacterUltimate(){
     if(!player || state!=='PLAYING') return;
     if(player.ultimateCd>0){ showFT('DEFINITIVA EN '+Math.ceil(player.ultimateCd/60)+'s',player.x,player.y-42,'#ffb7c4'); return; }
-    player.ultimateCd=5400; player.dragonCast=54; player.invuln=96; player.dragonWard=180; player.anim='cast'; player.animStart=animT;
+    player.ultimateCd=4200; player.dragonCast=60; player.invuln=132; player.dragonWard=300; player.anim='cast'; player.animStart=animT;
     player.hp=Math.min(player.maxHp,player.hp+player.maxHp*.22); player.fp=player.maxFp; player.sta=player.maxSta;
     const hits=dragonAreaDamage(player.x,player.y,270,150,true);
     for(let i=0;i<enemies.length;i++){ const e=enemies[i]; if(e.hp>0&&Math.hypot(e.x-player.x,e.y-player.y)<270+e.r){ applyCombatState(e,'vulnerable',220); applyPostureDamage(e,58); e.frozen=Math.max(e.frozen||0,72); } }
     if(boss&&boss.hp>0&&Math.hypot(boss.x-player.x,boss.y-player.y)<270+boss.r){ applyCombatState(boss,'vulnerable',220); applyPostureDamage(boss,70); boss.frozen=Math.max(boss.frozen||0,72); }
-    dragonFX.push({type:'ultimate',x:player.x,y:player.y,life:70,maxLife:70,radius:270}); triggerScreenShake(24,14); screenFlash=18; showFT('APOTEOSIS DEL SELLO',player.x,player.y-58,'#fff1f4'); updateHUD();
+    dragonFX.push({type:'ultimate',x:player.x,y:player.y,life:360,maxLife:360,radius:270}); spawnHolyUltimateFX(player.x,player.y); spawnRenewalFX('explosion',player.x,player.y,0,270); spawnRenewalFX('crystal',player.x,player.y,0,320); spawnRenewalFX('mirror',player.x,player.y,0,254); triggerScreenShake(24,14); screenFlash=18; showFT('APOTEOSIS DEL SELLO',player.x,player.y-58,'#fff1f4'); updateHUD();
   }
   function castMoonCold(){
     if(!player || player.weapon!=='espadonluna' || player.moonColdCd>0 || player.fp<18 || player.dragonCast>0 || player.isDodging){ if(player&&player.weapon!=='espadonluna') showFT('Requiere Espadón Lunar',player.x,player.y-34,'#9fb7ff'); return; }
     const ang=Math.atan2(mouse.y-(player.y-cam.y),mouse.x-(player.x-cam.x)); player.fp-=18; player.moonColdCd=150; player.dragonCast=24; player.anim='cast'; player.animStart=animT;
     const x=player.x+Math.cos(ang)*18,y=player.y+Math.sin(ang)*18;
     projectiles.push({x:x,y:y,vx:Math.cos(ang)*11,vy:Math.sin(ang)*11,dmg:62*player.dmgMul,r:9,life:72,color:'#9fc8ff',fromPlayer:true,weaponId:'espadonluna',skill:true,posture:24,moonWave:true});
-    dragonFX.push({type:'moonCold',x:player.x,y:player.y,ang:ang,life:28,maxLife:28,length:210}); showFT('LUNA FRÍA',player.x,player.y-44,'#9fc8ff');
+    dragonFX.push({type:'moonCold',x:player.x,y:player.y,ang:ang,life:28,maxLife:28,length:210}); spawnRenewalFX('smear',player.x+Math.cos(ang)*80,player.y+Math.sin(ang)*80,ang,126); spawnRenewalFX('smearV',player.x+Math.cos(ang)*80,player.y+Math.sin(ang)*80,ang+Math.PI/2,138); showFT('LUNA FRÍA',player.x,player.y-44,'#9fc8ff');
   }
   function castMoonAstral(){
     if(!player || player.weapon!=='espadonluna' || player.moonAstralCd>0 || player.fp<30 || player.dragonCast>0 || player.isDodging){ if(player&&player.weapon!=='espadonluna') showFT('Requiere Espadón Lunar',player.x,player.y-34,'#9fb7ff'); return; }
@@ -2077,11 +2335,11 @@
     const hits=dragonAreaDamage(player.x,player.y,132,82,false);
     for(let i=0;i<enemies.length;i++){ const e=enemies[i]; if(e.hp>0&&Math.hypot(e.x-player.x,e.y-player.y)<132+e.r) applyPostureDamage(e,34); }
     if(boss&&boss.hp>0&&Math.hypot(boss.x-player.x,boss.y-player.y)<132+boss.r) applyPostureDamage(boss,34);
-    dragonFX.push({type:'moonAstral',x:player.x,y:player.y,life:40,maxLife:40,radius:132}); triggerScreenShake(hits?12:6,6); showFT('ESPADA ASTRAL',player.x,player.y-48,'#d8b4ff');
+    dragonFX.push({type:'moonAstral',x:player.x,y:player.y,life:40,maxLife:40,radius:180}); spawnRenewalFX('holy',player.x,player.y,0,200); triggerScreenShake(hits?12:6,6); showFT('ESPADA ASTRAL',player.x,player.y-48,'#d8b4ff');
   }
   function updateDragonZones(){
     for(let i=dragonZones.length-1;i>=0;i--){ const z=dragonZones[i]; z.life--; z.pulse--; if(z.pulse<=0){ dragonAreaDamage(z.x,z.y,z.radius,24,true); z.pulse=42; } if(z.life<=0) dragonZones.splice(i,1); }
-    for(let i=dragonPending.length-1;i>=0;i--){ const p=dragonPending[i]; p.life--; if(p.life<=0){ dragonAreaDamage(p.x,p.y,p.radius,105,true); spawnP(p.x,p.y,'#ff4f70',28); dragonFX.push({type:'meteorImpact',x:p.x,y:p.y,life:36,maxLife:36,radius:p.radius}); triggerScreenShake(20,12); screenFlash=14; dragonPending.splice(i,1); } }
+    for(let i=dragonPending.length-1;i>=0;i--){ const p=dragonPending[i]; p.life--; if(p.life<=0){ dragonAreaDamage(p.x,p.y,p.radius,105,true); spawnRenewalFX('meteorExplosion',p.x,p.y,0,p.radius*2,180,false); triggerScreenShake(20,12); screenFlash=14; dragonPending.splice(i,1); } }
   }
 
   // ========== DRAW ==========
@@ -2099,7 +2357,7 @@
     const T=64;
     const c0=Math.floor(cam.x/T), c1=Math.floor((cam.x+W)/T)+1;
     const r0=Math.floor(cam.y/T), r1=Math.floor((cam.y+H)/T)+1;
-    const gimg = spr('suelo');
+    const gimg = spr('renewal-ground-tile') || spr('suelo');
     for(let r=r0;r<=r1;r++){
       for(let c=c0;c<=c1;c++){
         const bx=c*T-cam.x, by=r*T-cam.y;
@@ -2114,6 +2372,8 @@
     ctx.save(); ctx.globalAlpha=.13; ctx.strokeStyle='#7e2338'; ctx.lineWidth=1;
     for(let r=r0;r<=r1;r++){ for(let c=c0;c<=c1;c++){ const bx=c*T-cam.x, by=r*T-cam.y; ctx.strokeRect(bx+1,by+1,T-2,T-2); if((Math.abs(c*17+r*11)%9)===0){ ctx.beginPath(); ctx.moveTo(bx+14,by+22); ctx.lineTo(bx+26,by+35); ctx.lineTo(bx+20,by+49); ctx.stroke(); } } }
     ctx.restore();
+    // El tile renovado es ahora el piso base; el asset antiguo queda solo como fallback de carga.
+
     // moon tint
     if(bloodMoon){ ctx.fillStyle='rgba(120,20,20,0.18)'; ctx.fillRect(0,0,W,H); }
     else if(glintMoon){ ctx.fillStyle='rgba(40,80,140,0.12)'; ctx.fillRect(0,0,W,H); }
@@ -2123,8 +2383,16 @@
       const d=mapDecor[i], img=decorImages[d.src], x=d.x-cam.x, y=d.y-cam.y;
       if(x<-100||y<-100||x>W+100||y>H+100) continue;
       ctx.save(); ctx.globalAlpha=d.alpha; ctx.shadowColor=d.character?'#ff3d67':'#8e1635'; ctx.shadowBlur=d.character?12:5;
-      if(img&&img.complete&&img.naturalWidth) ctx.drawImage(img,x-d.w/2,y-d.h/2,d.w,d.h);
+      if(img&&img.complete&&img.naturalWidth){
+        if(Number.isFinite(d.sx) && Number.isFinite(d.sy) && Number.isFinite(d.sw) && Number.isFinite(d.sh)) ctx.drawImage(img,d.sx,d.sy,d.sw,d.sh,x-d.w/2,y-d.h/2,d.w,d.h);
+        else ctx.drawImage(img,x-d.w/2,y-d.h/2,d.w,d.h);
+      }
       else { ctx.fillStyle=d.character?'#8e1635':'#32302e'; ctx.beginPath(); ctx.arc(x,y,d.w*.35,0,Math.PI*2); ctx.fill(); }
+      if(d.kind==='altar' || d.kind==='teleport' || d.kind==='ritual' || d.kind==='crystal'){
+        const accent=d.kind==='crystal'?'#72dcff':(d.kind==='teleport'?'#b47bd4':'#ff8294');
+        ctx.globalAlpha=Math.min(1,d.alpha*.72); ctx.strokeStyle=accent; ctx.shadowColor=accent; ctx.shadowBlur=settings.performanceMode?6:14; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.arc(x,y,d.w*.62+Math.sin(animT*.08)*3,0,Math.PI*2); ctx.stroke(); ctx.shadowBlur=0;
+      }
       if(d.character){ ctx.strokeStyle='#ff8294'; ctx.globalAlpha=d.alpha*.55; ctx.strokeRect(x-d.w/2-3,y-d.h/2-3,d.w+6,d.h+6); }
       ctx.restore();
     }
@@ -2149,9 +2417,11 @@
       if(e.stealth>0) ctx.globalAlpha=.18+Math.sin(animT*.3)*.08;
       if(e.hitFlash>0) ctx.globalAlpha=Math.min(ctx.globalAlpha||1,.6);
       if(e.frozen>0){ ctx.globalAlpha=0.85; }
-      if(!drawSpr(e.spr, ex, ey, e.r*3.8, e.r*3.8, e.x>player.x)){
-        ctx.fillStyle=e.color;
-        ctx.beginPath(); ctx.arc(ex,ey,e.r,0,Math.PI*2); ctx.fill();
+      if(!drawRenewalEnemy(e,ex,ey)){
+        if(!drawSpr(e.spr, ex, ey, e.r*3.8, e.r*3.8, e.x>player.x)){
+          ctx.fillStyle=e.color;
+          ctx.beginPath(); ctx.arc(ex,ey,e.r,0,Math.PI*2); ctx.fill();
+        }
       }
       ctx.globalAlpha=1;
       if(e.barrier>0){ ctx.strokeStyle='#d8b4ff'; ctx.lineWidth=3; ctx.shadowColor='#b47bd4'; ctx.shadowBlur=12; ctx.beginPath(); ctx.arc(ex,ey,e.r+7+Math.sin(animT*.18)*2,0,Math.PI*2); ctx.stroke(); ctx.shadowBlur=0; }
@@ -2205,9 +2475,12 @@
 
     // habilidades del Sello Dracónico
     drawDragonEffects();
+    drawRenewalFX();
+    drawHolyUltimateFX();
 
     // particles
     for(let i=0;i<particles.length;i++){
+      if(settings.performanceMode && i%2===0) continue;
       const p=particles[i];
       const max=p.maxLife||20;
       ctx.globalAlpha=Math.max(0,p.life/max);
@@ -2312,7 +2585,7 @@
     if(moonAstral) moonAstral.textContent=lunar ? skillLabel(player.moonAstralCd,30) : 'Equipar Espadón';
     const magicCdEl=$('magic-skill-cd'), ultimateCdEl=$('ultimate-cd'), activeWeapon=getWeapon();
     if(magicCdEl) magicCdEl.textContent=activeWeapon.magicSkillName ? (player.magicSkillCd>0 ? (player.magicSkillCd/60).toFixed(1)+'s' : 'LISTO · '+activeWeapon.magicSkillCost+' FP') : 'Solo Bastón/Sello';
-    if(ultimateCdEl) ultimateCdEl.textContent=player.ultimateCd>0 ? (player.ultimateCd/60).toFixed(1)+'s' : 'LISTA · 90 s';
+    if(ultimateCdEl) ultimateCdEl.textContent=player.ultimateCd>0 ? (player.ultimateCd/60).toFixed(1)+'s' : 'LISTA · 70 s';
     const roarBtn=$('mob-dragon-roar'), breathBtn=$('mob-dragon-breath');
         if(roarBtn) roarBtn.disabled=player.dragonRoarCd>0 || player.fp<26;
     if(breathBtn) breathBtn.disabled=player.dragonBreathCd>0 || player.fp<20;
@@ -2335,6 +2608,8 @@
       const enlace = player.lanceBowMode ? (' · Enlace '+(player.lanceBowStep||1)+'/4') : '';
       we.textContent=getWeapon().nombre+enlace;
     }
+    const weaponIcon=$('surv-weapon-icon');
+    if(weaponIcon){ weaponIcon.src='assets/drakzeth/renewal/ui/'+player.weapon+'.png'; weaponIcon.alt='Icono de '+getWeapon().nombre; }
     const stEl=$('surv-stats'); if(stEl) stEl.textContent=formatStats();
     const buildEl=$('surv-build'); if(buildEl) buildEl.textContent='Build: '+getBuildName()+' · '+(player.dragonAffinity||'sangre').toUpperCase();
     const passiveEl=$('surv-passive'); if(passiveEl) passiveEl.textContent='Pasiva: '+(WEAPON_PASSIVES[player.weapon]||'Sin pasiva registrada');
@@ -2455,9 +2730,10 @@
 
   // ========== BUTTONS ==========
   const startBtn=$('surv-start-btn');
-  if(startBtn) startBtn.addEventListener('click', function(){
+    if(startBtn) startBtn.addEventListener('click', function(){
+    if(!mainPlayerSpriteReady){ updatePlayerAssetStatus(); showFT('Cargando personaje principal...',player?player.x:W/2,player?player.y:H/2,'#ff8294'); return; }
     const st=$('surv-start'); if(st){ st.classList.add('hidden'); st.style.display='none'; }
-    createPlayer(); day=1; kills=0; level=1; xp=0; xpNext=40;
+    holyUltimateFX=[]; renewalFX=[]; dragonFX=[]; createPlayer(); day=1; kills=0; level=1; xp=0; xpNext=40;
     ownedWeapons=['espadalarga','lanza','ballesta']; weaponIdx=0;
     const nameIn=$('surv-name');
     player.nombre = (nameIn && nameIn.value.trim()) ? nameIn.value.trim().slice(0,16) : 'Errante';
@@ -2497,18 +2773,21 @@
     openLevelUp(0);
   });
   // settings
-  const vol=$('surv-vol'), br=$('surv-bright');
+  const vol=$('surv-vol'), br=$('surv-bright'), perf=$('surv-performance');
   if(vol){ vol.value=settings.volume; vol.oninput=function(){ settings.volume=+vol.value; localStorage.setItem('er_surv_settings',JSON.stringify(settings)); }; }
   if(br){ br.value=settings.brightness; br.oninput=function(){ settings.brightness=+br.value; localStorage.setItem('er_surv_settings',JSON.stringify(settings)); const w=$('surv-wrapper'); if(w) w.style.filter='brightness('+settings.brightness+')'; }; }
+  if(perf){ perf.checked=!!settings.performanceMode; perf.onchange=function(){ settings.performanceMode=!!perf.checked; localStorage.setItem('er_surv_settings',JSON.stringify(settings)); if(player) initMapDecor(); updateHUD(); }; }
   // mobile controls
   function bindHold(id, on, off){
     const el=$(id); if(!el) return;
     const start=function(ev){ ev.preventDefault(); on(); };
     const end=function(ev){ ev.preventDefault(); if(off) off(); };
     el.addEventListener('touchstart', start, {passive:false});
-    el.addEventListener('touchend', end);
+    el.addEventListener('touchend', end, {passive:false});
+    el.addEventListener('touchcancel', end, {passive:false});
     el.addEventListener('mousedown', start);
     el.addEventListener('mouseup', end);
+    el.addEventListener('mouseleave', end);
   }
   bindHold('mob-up', function(){ keys['w']=true; }, function(){ keys['w']=false; });
   bindHold('mob-down', function(){ keys['s']=true; }, function(){ keys['s']=false; });
@@ -2527,6 +2806,7 @@
   const mms=$('mob-magic-skill'); if(mms) mms.addEventListener('click', function(e){ e.preventDefault(); castMagicWeaponSkill(); });
   const mul=$('mob-ultimate'); if(mul) mul.addEventListener('click', function(e){ e.preventDefault(); castCharacterUltimate(); });
   const mex=$('mob-execute'); if(mex) mex.addEventListener('click', function(e){ e.preventDefault(); tryExecution(); });
+  const mco=$('mob-combo'); if(mco) mco.addEventListener('click', function(e){ e.preventDefault(); toggleLanceBowCombo(); });
   const md=$('mob-dodge'); if(md) md.addEventListener('click', function(e){ e.preventDefault(); tryDodge(); });
   const mp=$('mob-parry'); if(mp) mp.addEventListener('click', function(e){ e.preventDefault(); tryParry(); });
   const mf=$('mob-flask'); if(mf) mf.addEventListener('click', function(e){ e.preventDefault(); tryFlask(); });
