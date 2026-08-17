@@ -317,10 +317,10 @@
           <input id="surv-name" type="text" maxlength="16" placeholder="Errante" value="Errante"
             style="margin-top:0.35rem;padding:0.45rem 0.7rem;background:rgba(0,0,0,0.5);border:1px solid rgba(213,47,72,0.55);color:#ffd1d8;font-family:Cinzel,serif;width:min(260px,80%);text-align:center;">
         </label>
-        <p class="overlay-subtitle">66 días · 1:00 por noche · Jefes cada 11 días</p>
+        <p class="overlay-subtitle">66 días · Días 1–10: 1:00 · Desde el día 11: 2:30 · Jefes: hasta derrotarlos</p>
         <p class="overlay-subtitle" style="font-size:0.95rem;max-width:480px;margin:0.6rem auto 1.2rem;line-height:1.55;">
           <b>WASD</b> mover · <b>Clic/Espacio</b> atacar · <b>Shift</b> rodar · <b>Q</b> parry · <b>R</b> frasco<br>
-          <b>X</b> Rugido · <b>Z</b> Aliento · <b>V/G/B/M/N</b> habilidades avanzadas · <b>E</b> ejecución<br>
+          <b>X</b> Rugido · <b>Z</b> Aliento · <b>V/G/B/M</b> habilidades avanzadas · <b>Mantén N</b> cargar maná/Corazón · <b>E</b> ejecución<br>
           <b>1-9</b> armas · <b>C</b> combo Lanza ↔ Ballesta · Al subir de nivel eliges tus estadísticas.
         </p>
         <button class="btn-juego" id="surv-start-btn" disabled>CARGANDO PERSONAJE...</button>
@@ -438,7 +438,7 @@
             <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">G</span><span><b>Vuelo</b><small>22 FP</small></span></div>
             <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">B</span><span><b>Marea</b><small>28 FP</small></span></div>
             <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">M</span><span><b>Meteorito</b><small>36 FP</small></span></div>
-            <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">N</span><span><b>Corazón</b><small>38 FP</small></span></div>
+            <div class="dragon-skill-chip dragon-skill-chip--minor"><span class="dragon-skill-key">N</span><span><b>Corazón</b><small id="dragon-heart-cd">Mantén N · carga lenta</small></span></div>
           </div>
           <div class="moon-skill-hud" aria-label="Habilidades del Espadón Lunar">
             <div class="dragon-skill-chip dragon-skill-chip--moon"><span class="dragon-skill-key">T</span><span><b>Luna Fría</b><small id="moon-cold-cd">Espadón · 18 FP</small></span></div>
@@ -455,30 +455,32 @@
         </div>
       </div>
 
-      <div id="surv-mobile" style="display:none;position:absolute;inset:0;pointer-events:none;z-index:15;">
-        <div style="position:absolute;left:12px;bottom:70px;display:grid;grid-template-columns:48px 48px 48px;grid-template-rows:48px 48px 48px;gap:6px;pointer-events:auto;">
-          <span></span><button type="button" id="mob-up" class="mob-btn">▲</button><span></span>
-          <button type="button" id="mob-left" class="mob-btn">◀</button><button type="button" id="mob-down" class="mob-btn">▼</button><button type="button" id="mob-right" class="mob-btn">▶</button>
+      <div id="surv-mobile" class="mobile-controls" style="display:none;position:absolute;inset:0;pointer-events:none;z-index:15;" aria-label="Controles táctiles del minijuego">
+        <div class="mobile-stick-zone" id="mob-stick-zone" aria-label="Joystick virtual">
+          <div class="mobile-stick" id="mob-stick"><span></span></div>
         </div>
-        <div style="position:absolute;right:12px;bottom:70px;display:grid;grid-template-columns:56px 56px;gap:8px;pointer-events:auto;">
-          <button type="button" id="mob-atk" class="mob-btn mob-btn--gold">ATK</button>
-          <button type="button" id="mob-dragon-roar" class="mob-btn mob-btn--dragon">X · Rugido</button>
-          <button type="button" id="mob-dragon-breath" class="mob-btn mob-btn--dragon">Z · Aliento</button>
-          <button type="button" id="mob-dragon-claw" class="mob-btn mob-btn--dragon">V · Garra</button>
-          <button type="button" id="mob-dragon-flight" class="mob-btn mob-btn--dragon">G · Vuelo</button>
-          <button type="button" id="mob-dragon-tide" class="mob-btn mob-btn--dragon">B · Marea</button>
-          <button type="button" id="mob-dragon-meteor" class="mob-btn mob-btn--dragon">M · Meteoro</button>
-          <button type="button" id="mob-dragon-heart" class="mob-btn mob-btn--dragon">N · Corazón</button>
-          <button type="button" id="mob-moon-cold" class="mob-btn mob-btn--moon">T · Luna</button>
-          <button type="button" id="mob-moon-astral" class="mob-btn mob-btn--moon">Y · Astral</button>
-          <button type="button" id="mob-magic-skill" class="mob-btn mob-btn--arcane">J · Arte</button>
-          <button type="button" id="mob-ultimate" class="mob-btn mob-btn--ultimate">U · Ulti</button>
-          <button type="button" id="mob-execute" class="mob-btn mob-btn--dragon">E · Ejecutar</button>
-          <button type="button" id="mob-combo" class="mob-btn mob-btn--dragon">C · Combo</button>
-          <button type="button" id="mob-dodge" class="mob-btn">Rodar</button>
-          <button type="button" id="mob-parry" class="mob-btn">Parry</button>
-          <button type="button" id="mob-flask" class="mob-btn">🧪</button>
-          <button type="button" id="mob-pause" class="mob-btn" style="grid-column:span 2;">Pausa</button>
+        <div class="mobile-actions" aria-label="Acciones principales">
+          <button type="button" id="mob-atk" class="mob-btn mob-btn--gold mob-btn--attack">ATK</button>
+          <button type="button" id="mob-dodge" class="mob-btn mob-btn--dodge">RODAR</button>
+          <button type="button" id="mob-parry" class="mob-btn">PARRY</button>
+          <button type="button" id="mob-flask" class="mob-btn">FP</button>
+          <button type="button" id="mob-pause" class="mob-btn">Ⅱ</button>
+          <button type="button" id="mob-skills-toggle" class="mob-btn mob-btn--dragon mobile-skills-toggle" aria-expanded="false">HABILIDADES</button>
+        </div>
+        <div class="mobile-skills" id="mob-skills" hidden aria-label="Habilidades táctiles">
+          <button type="button" id="mob-dragon-heart" class="mob-btn mob-btn--dragon mobile-hold">MANTÉN N · CARGA</button>
+          <button type="button" id="mob-dragon-roar" class="mob-btn mob-btn--dragon">X · RUGIDO</button>
+          <button type="button" id="mob-dragon-breath" class="mob-btn mob-btn--dragon">Z · ALIENTO</button>
+          <button type="button" id="mob-dragon-claw" class="mob-btn mob-btn--dragon">V · GARRA</button>
+          <button type="button" id="mob-dragon-flight" class="mob-btn mob-btn--dragon">G · VUELO</button>
+          <button type="button" id="mob-dragon-tide" class="mob-btn mob-btn--dragon">B · MAREA</button>
+          <button type="button" id="mob-dragon-meteor" class="mob-btn mob-btn--dragon">M · METEORO</button>
+          <button type="button" id="mob-moon-cold" class="mob-btn mob-btn--moon">T · LUNA</button>
+          <button type="button" id="mob-moon-astral" class="mob-btn mob-btn--moon">Y · ASTRAL</button>
+          <button type="button" id="mob-magic-skill" class="mob-btn mob-btn--arcane">J · ARTE</button>
+          <button type="button" id="mob-ultimate" class="mob-btn mob-btn--ultimate">U · ULTI</button>
+          <button type="button" id="mob-execute" class="mob-btn mob-btn--dragon">E · EJECUTAR</button>
+          <button type="button" id="mob-combo" class="mob-btn mob-btn--dragon">C · COMBO</button>
         </div>
       </div>
 
@@ -486,7 +488,7 @@
         <b style="color:#ff8294;">Controles</b><br>
         WASD — mover · Clic/Espacio — atacar<br>
         Shift — rodar · Q — parry · R — frasco<br>
-        X — Rugido del Sello · Z — Aliento Carmesí · E — ejecución · C — combo Lanza ↔ Ballesta<br>
+        X — Rugido del Sello · Z — Aliento Carmesí · Mantén N — cargar maná/Corazón · E — ejecución · C — combo Lanza ↔ Ballesta<br>
         T — Luna Fría · Y — Espada Astral (requieren el Espadón Lunar)<br>
         J — habilidad del Bastón/Sello · U — Apoteosis del Sello (70 s)<br>
         ESC — pausa · 1-9 — arma · F — pantalla completa
@@ -694,6 +696,6 @@
   <p class="pie__extra">Los Reinos Quebrados aguardan</p>
 </footer>
 
-<script src="script.js?v=renovacion-full-assets-performance-19-no-character-frames"></script>
+<script src="script.js?v=nayutaro-aura-mana-44"></script>
 </body>
 </html>

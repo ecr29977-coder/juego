@@ -1,0 +1,350 @@
+{
+  "frames": {
+    "aura_00": {
+      "frame": {
+        "x": 2,
+        "y": 2,
+        "w": 41,
+        "h": 42
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 41,
+        "h": 42
+      },
+      "sourceSize": {
+        "w": 41,
+        "h": 42
+      }
+    },
+    "aura_01": {
+      "frame": {
+        "x": 138,
+        "y": 2,
+        "w": 73,
+        "h": 76
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 73,
+        "h": 76
+      },
+      "sourceSize": {
+        "w": 73,
+        "h": 76
+      }
+    },
+    "aura_02": {
+      "frame": {
+        "x": 274,
+        "y": 2,
+        "w": 96,
+        "h": 98
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 96,
+        "h": 98
+      },
+      "sourceSize": {
+        "w": 96,
+        "h": 98
+      }
+    },
+    "aura_03": {
+      "frame": {
+        "x": 410,
+        "y": 2,
+        "w": 106,
+        "h": 116
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 106,
+        "h": 116
+      },
+      "sourceSize": {
+        "w": 106,
+        "h": 116
+      }
+    },
+    "aura_04": {
+      "frame": {
+        "x": 2,
+        "y": 178,
+        "w": 114,
+        "h": 121
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 114,
+        "h": 121
+      },
+      "sourceSize": {
+        "w": 114,
+        "h": 121
+      }
+    },
+    "aura_05": {
+      "frame": {
+        "x": 138,
+        "y": 178,
+        "w": 125,
+        "h": 134
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 125,
+        "h": 134
+      },
+      "sourceSize": {
+        "w": 125,
+        "h": 134
+      }
+    },
+    "aura_06": {
+      "frame": {
+        "x": 274,
+        "y": 178,
+        "w": 132,
+        "h": 147
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 132,
+        "h": 147
+      },
+      "sourceSize": {
+        "w": 132,
+        "h": 147
+      }
+    },
+    "aura_07": {
+      "frame": {
+        "x": 410,
+        "y": 178,
+        "w": 131,
+        "h": 158
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 131,
+        "h": 158
+      },
+      "sourceSize": {
+        "w": 131,
+        "h": 158
+      }
+    },
+    "aura_08": {
+      "frame": {
+        "x": 2,
+        "y": 354,
+        "w": 129,
+        "h": 162
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 129,
+        "h": 162
+      },
+      "sourceSize": {
+        "w": 129,
+        "h": 162
+      }
+    },
+    "aura_09": {
+      "frame": {
+        "x": 138,
+        "y": 354,
+        "w": 122,
+        "h": 162
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 122,
+        "h": 162
+      },
+      "sourceSize": {
+        "w": 122,
+        "h": 162
+      }
+    },
+    "aura_10": {
+      "frame": {
+        "x": 274,
+        "y": 354,
+        "w": 104,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 104,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 104,
+        "h": 165
+      }
+    },
+    "aura_11": {
+      "frame": {
+        "x": 410,
+        "y": 354,
+        "w": 39,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 39,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 39,
+        "h": 172
+      }
+    },
+    "aura_12": {
+      "frame": {
+        "x": 2,
+        "y": 530,
+        "w": 9,
+        "h": 124
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 9,
+        "h": 124
+      },
+      "sourceSize": {
+        "w": 9,
+        "h": 124
+      }
+    },
+    "aura_13": {
+      "frame": {
+        "x": 138,
+        "y": 530,
+        "w": 15,
+        "h": 43
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 15,
+        "h": 43
+      },
+      "sourceSize": {
+        "w": 15,
+        "h": 43
+      }
+    },
+    "aura_14": {
+      "frame": {
+        "x": 274,
+        "y": 530,
+        "w": 5,
+        "h": 20
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 5,
+        "h": 20
+      },
+      "sourceSize": {
+        "w": 5,
+        "h": 20
+      }
+    },
+    "aura_15": {
+      "frame": {
+        "x": 410,
+        "y": 530,
+        "w": 10,
+        "h": 29
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 10,
+        "h": 29
+      },
+      "sourceSize": {
+        "w": 10,
+        "h": 29
+      }
+    },
+    "aura_16": {
+      "frame": {
+        "x": 2,
+        "y": 706,
+        "w": 4,
+        "h": 11
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 11
+      },
+      "sourceSize": {
+        "w": 4,
+        "h": 11
+      }
+    }
+  },
+  "meta": {
+    "app": "Nayutaro aura atlas",
+    "image": "nayutaro-aura-atlas.png",
+    "format": "RGBA8888",
+    "scale": "1"
+  }
+}

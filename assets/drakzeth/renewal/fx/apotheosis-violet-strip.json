@@ -1,0 +1,370 @@
+{
+  "source": "/home/ubuntu/upload/pasted_file_hUC6iE_image.png",
+  "columns": 18,
+  "rows": 1,
+  "frameW": 192,
+  "frameH": 192,
+  "fps": 10,
+  "crops": [
+    {
+      "frame": 1,
+      "crop": [
+        120,
+        0,
+        255,
+        88
+      ],
+      "content_bbox_source": [
+        9,
+        9,
+        127,
+        73
+      ],
+      "output_size": [
+        119,
+        65
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 2,
+      "crop": [
+        256,
+        0,
+        414,
+        90
+      ],
+      "content_bbox_source": [
+        9,
+        4,
+        149,
+        78
+      ],
+      "output_size": [
+        141,
+        75
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 3,
+      "crop": [
+        413,
+        0,
+        561,
+        92
+      ],
+      "content_bbox_source": [
+        8,
+        8,
+        140,
+        82
+      ],
+      "output_size": [
+        133,
+        75
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 4,
+      "crop": [
+        568,
+        0,
+        698,
+        92
+      ],
+      "content_bbox_source": [
+        9,
+        8,
+        122,
+        83
+      ],
+      "output_size": [
+        114,
+        76
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 5,
+      "crop": [
+        692,
+        0,
+        785,
+        92
+      ],
+      "content_bbox_source": [
+        10,
+        8,
+        85,
+        83
+      ],
+      "output_size": [
+        76,
+        76
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 6,
+      "crop": [
+        785,
+        0,
+        877,
+        92
+      ],
+      "content_bbox_source": [
+        8,
+        7,
+        91,
+        83
+      ],
+      "output_size": [
+        84,
+        77
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 7,
+      "crop": [
+        868,
+        0,
+        958,
+        92
+      ],
+      "content_bbox_source": [
+        0,
+        9,
+        82,
+        83
+      ],
+      "output_size": [
+        83,
+        75
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 8,
+      "crop": [
+        952,
+        0,
+        1063,
+        92
+      ],
+      "content_bbox_source": [
+        8,
+        9,
+        82,
+        83
+      ],
+      "output_size": [
+        75,
+        75
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 9,
+      "crop": [
+        142,
+        103,
+        229,
+        185
+      ],
+      "content_bbox_source": [
+        9,
+        7,
+        78,
+        81
+      ],
+      "output_size": [
+        126,
+        135
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 10,
+      "crop": [
+        236,
+        103,
+        315,
+        185
+      ],
+      "content_bbox_source": [
+        9,
+        8,
+        69,
+        81
+      ],
+      "output_size": [
+        110,
+        133
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 11,
+      "crop": [
+        310,
+        103,
+        382,
+        185
+      ],
+      "content_bbox_source": [
+        9,
+        7,
+        62,
+        81
+      ],
+      "output_size": [
+        97,
+        135
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 12,
+      "crop": [
+        383,
+        103,
+        444,
+        185
+      ],
+      "content_bbox_source": [
+        5,
+        8,
+        51,
+        81
+      ],
+      "output_size": [
+        85,
+        133
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 13,
+      "crop": [
+        440,
+        103,
+        493,
+        185
+      ],
+      "content_bbox_source": [
+        7,
+        8,
+        46,
+        81
+      ],
+      "output_size": [
+        72,
+        133
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 14,
+      "crop": [
+        487,
+        103,
+        530,
+        185
+      ],
+      "content_bbox_source": [
+        6,
+        8,
+        37,
+        81
+      ],
+      "output_size": [
+        58,
+        133
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 15,
+      "crop": [
+        526,
+        103,
+        548,
+        185
+      ],
+      "content_bbox_source": [
+        7,
+        7,
+        17,
+        81
+      ],
+      "output_size": [
+        20,
+        135
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 16,
+      "crop": [
+        547,
+        103,
+        570,
+        185
+      ],
+      "content_bbox_source": [
+        5,
+        7,
+        21,
+        76
+      ],
+      "output_size": [
+        31,
+        126
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 17,
+      "crop": [
+        560,
+        103,
+        582,
+        185
+      ],
+      "content_bbox_source": [
+        4,
+        8,
+        18,
+        56
+      ],
+      "output_size": [
+        27,
+        88
+      ],
+      "baseline_y": 172
+    },
+    {
+      "frame": 18,
+      "crop": [
+        572,
+        103,
+        590,
+        185
+      ],
+      "content_bbox_source": [
+        3,
+        8,
+        6,
+        35
+      ],
+      "output_size": [
+        7,
+        50
+      ],
+      "baseline_y": 172
+    }
+  ]
+}

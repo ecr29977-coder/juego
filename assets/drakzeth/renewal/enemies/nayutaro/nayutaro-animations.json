@@ -1,0 +1,114 @@
+{
+  "intro": [
+    "intro_00",
+    "intro_01",
+    "intro_02",
+    "intro_03",
+    "intro_04",
+    "intro_05"
+  ],
+  "counterIdle": [
+    "counterIdle_00",
+    "counterIdle_01",
+    "counterIdle_02"
+  ],
+  "walk": [
+    "walk_00",
+    "walk_01",
+    "walk_02",
+    "walk_03",
+    "walk_04",
+    "walk_05",
+    "walk_06",
+    "walk_07",
+    "walk_08",
+    "walk_09",
+    "walk_10",
+    "walk_11"
+  ],
+  "roundhouse": [
+    "roundhouse_00",
+    "roundhouse_01",
+    "roundhouse_02",
+    "roundhouse_03",
+    "roundhouse_04",
+    "roundhouse_05",
+    "roundhouse_06",
+    "roundhouse_07"
+  ],
+  "victory": [
+    "victory_00",
+    "victory_01",
+    "victory_02",
+    "victory_03",
+    "victory_04",
+    "victory_05",
+    "victory_06",
+    "victory_07",
+    "victory_08",
+    "victory_09",
+    "victory_10",
+    "victory_11"
+  ],
+  "defeat": [
+    "defeat_00",
+    "defeat_01",
+    "defeat_02",
+    "defeat_03",
+    "defeat_04",
+    "defeat_05",
+    "defeat_06",
+    "defeat_07"
+  ],
+  "transform": [
+    "transform_00",
+    "transform_01",
+    "transform_02",
+    "transform_03",
+    "transform_04",
+    "transform_05",
+    "transform_06",
+    "transform_07",
+    "transform_08"
+  ],
+  "robustIdle": [
+    "robustIdle_00",
+    "robustIdle_01",
+    "robustIdle_02",
+    "robustIdle_03",
+    "robustIdle_04",
+    "robustIdle_05",
+    "robustIdle_06"
+  ],
+  "teleport": [
+    "teleport_00",
+    "teleport_01",
+    "teleport_02",
+    "teleport_03",
+    "teleport_04",
+    "teleport_05",
+    "teleport_06",
+    "teleport_07",
+    "teleport_08",
+    "teleport_09",
+    "teleport_10",
+    "teleport_11"
+  ],
+  "punch": [
+    "punch_00",
+    "punch_01",
+    "punch_02",
+    "punch_03",
+    "punch_04",
+    "punch_05"
+  ],
+  "chouCharge": [
+    "chouCharge_00",
+    "chouCharge_01",
+    "chouCharge_02",
+    "chouCharge_03",
+    "chouCharge_04",
+    "chouCharge_05",
+    "chouCharge_06"
+  ]
+}
